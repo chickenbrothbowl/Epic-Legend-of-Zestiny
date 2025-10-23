@@ -17,7 +17,7 @@ public class Card : MonoBehaviour
     
     [Header("Interaction")]
     public LayerMask slotLayerMask;
-    private CardSlot currentSlot;
+    public CardSlot currentSlot;
     private Vector3 dragOffset;
     private bool isDragging = false;
     private Camera mainCamera;
@@ -93,15 +93,20 @@ public class Card : MonoBehaviour
     
     CardSlot FindSlotUnderCard()
     {
-        Ray ray = new Ray(transform.position + Vector3.up * 10f, Vector3.down);
-        RaycastHit hit;
-        
-        if (Physics.Raycast(ray, out hit, 20f, slotLayerMask))
-        {
-            return hit.collider.GetComponent<CardSlot>();
-        }
-        
-        return null;
+		Collider cardCollider = GetComponent<Collider>();
+    	if (cardCollider != null) cardCollider.enabled = false;
+    
+    	Ray ray = new Ray(transform.position + Vector3.up * 10f, Vector3.down);
+    	RaycastHit hit;
+    	CardSlot result = null;
+    
+    	if (Physics.Raycast(ray, out hit, 20f, slotLayerMask))
+    	{
+        	result = hit.collider.GetComponent<CardSlot>();
+    	}
+    
+    	if (cardCollider != null) cardCollider.enabled = true;
+    	return result;
     }
     
     Vector3 GetMouseWorldPosition()

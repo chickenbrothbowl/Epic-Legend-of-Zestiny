@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4130865657531461969}
   - component: {fileID: 6582314401668829746}
   - component: {fileID: 8673714157668519985}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: CardSlot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -71,7 +71,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3

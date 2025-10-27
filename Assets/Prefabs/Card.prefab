@@ -30,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0.17364825, y: -0, z: -0, w: 0.9848077}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.12, y: 0.18000002, z: 0.0050000004}
+  m_LocalScale: {x: 0.12, y: 0.18, z: 0.0050000004}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -136,3 +136,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   currentSlot: {fileID: 0}
+  boardHeight: -1
+  dragLiftSpeed: 15
+  isReturning: 0

@@ -32,7 +32,10 @@ public class DeckLayout : MonoBehaviour
         cards = new List<GameObject>();
         for (int i = 0; i < transform.childCount; i++)
         {
-            cards.Add(transform.GetChild(i).gameObject);
+			GameObject cardObject = transform.GetChild(i).gameObject;
+            cards.Add(cardObject);
+			Card card = cardObject.GetComponent<Card>();
+			card.isDraggable = false;
         }
     }
 
@@ -45,11 +48,13 @@ public class DeckLayout : MonoBehaviour
         cards.Remove(card);
         previousChildCount--;
         card.transform.SetParent(hand.transform);
+		
 
         // Reset card's animation state
         Card cardComponent = card.GetComponent<Card>();
         if (cardComponent != null)
         {
+			cardComponent.isDraggable = true;
             cardComponent.isReturning = false;
         }
     }

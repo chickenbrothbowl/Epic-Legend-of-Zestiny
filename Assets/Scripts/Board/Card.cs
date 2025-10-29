@@ -23,9 +23,13 @@ public class Card : MonoBehaviour
     public float dragLiftSpeed = 15f; // Speed for lifting animation
     private bool isDragging = false;
 	public bool isReturning = false;
+    public bool isDraggable = true;
     private Camera mainCamera;
     private Vector3 targetPosition;
 	private Vector3 initialPosition;
+    private string oldName;
+    private int oldAtk;
+    private int oldDef;
     
     void Start()
     {
@@ -45,33 +49,39 @@ public class Card : MonoBehaviour
         if (nameText != null) nameText.text = cardName;
         if (attackText != null) attackText.text = attackValue.ToString();
         if (defenseText != null) defenseText.text = defenseValue.ToString();
+        oldName = cardName;
+        oldAtk = attackValue;
+        oldDef = defenseValue;
     }
     
 	void OnMouseDown()
 	{
-    	isDragging = true;
-    	targetPosition = transform.position;
-		initialPosition = transform.position;
+        if (isDraggable)
+        {
+            isDragging = true;
+            targetPosition = transform.position;
+            initialPosition = transform.position;
 
-    	// Calculate offset using the card's CURRENT height (not boardHeight yet)
-    	Vector3 mousePos = GetMouseWorldPositionAtHeight(transform.position.y);
-    	dragOffset = new Vector3(
-        transform.position.x - mousePos.x,
-        0,
-        transform.position.z - mousePos.z
-    	);
+            // Calculate offset using the card's CURRENT height (not boardHeight yet)
+            Vector3 mousePos = GetMouseWorldPositionAtHeight(transform.position.y);
+            dragOffset = new Vector3(
+                transform.position.x - mousePos.x,
+                0,
+                transform.position.z - mousePos.z
+            );
     
-    	// Remove from current slot if in one
-    	if (currentSlot != null)
-    	{
-        currentSlot.RemoveCard();
-        currentSlot = null;
-    	}
+            // Remove from current slot if in one
+            if (currentSlot != null)
+            {
+                currentSlot.RemoveCard();
+                currentSlot = null;
+            }
+        }
 }
     
     void OnMouseDrag()
     {
-        if (isDragging)
+        if (isDraggable)
         {
             // Get mouse position at the fixed board height
             Vector3 mousePos = GetMouseWorldPositionAtHeight(boardHeight);
@@ -97,32 +107,41 @@ public class Card : MonoBehaviour
 				if (Vector3.Distance(transform.position, targetPosition) < 0.01f){
 					transform.position = targetPosition;
 					isReturning = false;
-				}
+                    isDraggable = true;
+                }
 			}
+        }
+
+        if (cardName != oldName || defenseValue != oldDef || attackValue != oldAtk)
+        {
+            UpdateCardVisuals();
         }
     }
     
     void OnMouseUp()
     {
-        isDragging = false;
+        if (isDraggable)
+        {
+            isDragging = false;
         
-        // Try to find a slot under the card
-        CardSlot targetSlot = FindSlotUnderCard();
+            // Try to find a slot under the card
+            CardSlot targetSlot = FindSlotUnderCard();
         
-        if (targetSlot != null && targetSlot.IsEmpty)
-        {
-            targetSlot.PlaceCard(this);
-            currentSlot = targetSlot;
-        }
-        else if (currentSlot != null)
-        {
-            // Return to previous slot
-            currentSlot.PlaceCard(this);
-        }
-        else
-        {
-            // No valid slot, could return to hand or starting position
-            ReturnToHand();
+            if (targetSlot != null && targetSlot.IsEmpty)
+            {
+                targetSlot.PlaceCard(this);
+                currentSlot = targetSlot;
+            }
+            else if (currentSlot != null)
+            {
+                // Return to previous slot
+                currentSlot.PlaceCard(this);
+            }
+            else
+            {
+                // No valid slot, could return to hand or starting position
+                ReturnToHand();
+            }
         }
     }
     
@@ -163,6 +182,7 @@ public class Card : MonoBehaviour
     public void ReturnToHand()
     {
 		isReturning = true;
+        isDraggable = false;
 		targetPosition = initialPosition;
         Debug.Log("Card returned to hand");
     }

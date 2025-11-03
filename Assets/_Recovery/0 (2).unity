@@ -903,11 +903,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5738469664942356658, guid: 5cad9f05812fb4598ab8b67bc1e4c41e, type: 3}
   m_PrefabInstance: {fileID: 1849044436}
   m_PrefabAsset: {fileID: 0}
---- !u!23 &920493076 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 6918855117024373064, guid: 5cad9f05812fb4598ab8b67bc1e4c41e, type: 3}
-  m_PrefabInstance: {fileID: 1849044436}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &954796450 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4130865657531461969, guid: 0025adc5b19374c85bfea75177ba7d8b, type: 3}
@@ -1630,10 +1625,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1554178401}
     m_Modifications:
-    - target: {fileID: 1506684640594805134, guid: 5cad9f05812fb4598ab8b67bc1e4c41e, type: 3}
-      propertyPath: cardRenderer
-      value: 
-      objectReference: {fileID: 920493076}
     - target: {fileID: 5738469664942356658, guid: 5cad9f05812fb4598ab8b67bc1e4c41e, type: 3}
       propertyPath: m_LocalScale.x
       value: 2.8
@@ -2057,10 +2048,6 @@ PrefabInstance:
     - target: {fileID: 1506684640594805134, guid: 5cad9f05812fb4598ab8b67bc1e4c41e, type: 3}
       propertyPath: boardHeight
       value: -0.95
-      objectReference: {fileID: 0}
-    - target: {fileID: 1506684640594805134, guid: 5cad9f05812fb4598ab8b67bc1e4c41e, type: 3}
-      propertyPath: cardRenderer
-      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 5738469664942356658, guid: 5cad9f05812fb4598ab8b67bc1e4c41e, type: 3}
       propertyPath: m_LocalScale.x

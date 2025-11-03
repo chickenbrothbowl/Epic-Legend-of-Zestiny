@@ -48,14 +48,14 @@ MonoBehaviour:
   currentCard: {fileID: 0}
   slotIndex: 0
   borderTexture: {fileID: 2800000, guid: 1519d31d74fa3414d841be19ed59a65f, type: 3}
-  borderWidth: 0.01
+  borderWidth: 0.1
   borderHalfWidth: 0.075
   borderHalfHeight: 0.12
   borderElevation: 0.01
   normalColor: {r: 1, g: 1, b: 1, a: 1}
   hoverColor: {r: 1, g: 1, b: 1, a: 1}
   glowIntensity: 5
-  textureTiling: 3
+  textureTiling: 0.5
 --- !u!65 &8673714157668519985
 BoxCollider:
   m_ObjectHideFlags: 0

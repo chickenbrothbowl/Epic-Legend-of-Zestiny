@@ -65,13 +65,12 @@ public class CardHandLayout : MonoBehaviour
     IEnumerator AnimateToPosition(GameObject card, Vector3 targetPosition)
     {
         if (card == null) yield break;
+		
 
-        Debug.Log($"[CardHandLayout] Starting animation for {card.name} from {card.transform.position} to {targetPosition}");
         int frameCount = 0;
 
-        while (Vector3.Distance(card.transform.position, targetPosition) > 0.01f)
+        while (Vector3.Distance(card.transform.position, targetPosition) > 0.01f && card.transform.parent == this.transform)
         {
-			Debug.Log($"[CardHandLayout] Frame {frameCount}: Time.deltaTime={Time.deltaTime}, distance={Vector3.Distance(card.transform.position, targetPosition)}");
             // Clamp lerp factor to prevent instant snapping on frame time spikes
             float lerpFactor = Mathf.Min(Time.deltaTime * animationSpeed, 0.5f);
             card.transform.position = Vector3.Lerp(
@@ -84,7 +83,9 @@ public class CardHandLayout : MonoBehaviour
         }
 
         Debug.Log($"[CardHandLayout] Animation completed for {card.name} in {frameCount} frames");
-        // Snap to final position
+		if (card.transform.parent == this.transform){
         card.transform.position = targetPosition;
+		}
+        // Snap to final position
     }
 }

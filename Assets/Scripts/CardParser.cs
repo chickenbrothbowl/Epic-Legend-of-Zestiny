@@ -64,6 +64,27 @@ public static class CardParser
          var juicyToken = columns[14];
          bool juicy = juicyToken == "1";
 
+         var opportunistToken = columns[15];
+         bool opportunist = opportunistToken == "1";
+
+         var pummelToken = columns[16];
+         bool pumel = pummelToken == "1";
+
+         var reachToken = columns[17];
+         bool reach = reachToken == "1";
+
+         var rottenToken = columns[18];
+         bool rotten = rottenToken == "1";
+
+         var shieldedToken = columns[19];
+         bool shielded = shieldedToken == "1";
+
+         var tribalToken = columns[20];
+         bool tribal = tribalToken == "1";
+
+         var vampireToken = columns[21];
+         bool vampire = vampireToken == "1";
+
          var card_data = new CardData
          {
             CardName = columns[0].Trim(),
@@ -80,7 +101,14 @@ public static class CardParser
             Hardened = hardened,
             Harvest = harvest,
             Juiced = juiced,
-            Juicy = juicy
+            Juicy = juicy,
+            Opportunist = opportunist,
+            Pummel = pumel,
+            Reach = reach,
+            Rotten = rotten,
+            Shielded = shielded,
+            Tribal = tribal,
+            Vampire = vampire
          };
 
          cards.Add(card_data);
@@ -114,6 +142,13 @@ public class CardData
    public bool Harvest { get; set; }
    public bool Juiced { get; set; }
    public bool Juicy { get; set; }
+   public bool Opportunist { get; set; }
+   public bool Pummel { get; set; }
+   public bool Reach { get; set; }
+   public bool Rotten { get; set; }
+   public bool Shielded { get; set; }
+   public bool Tribal { get; set; }
+   public bool Vampire { get; set; }
 
    public virtual void Use()
     {

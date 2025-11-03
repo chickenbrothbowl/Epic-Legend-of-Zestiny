@@ -186,9 +186,26 @@ public class Card : MonoBehaviour
 		targetPosition = initialPosition;
         Debug.Log("Card returned to hand");
     }
-    
+
     public void SetSlot(CardSlot slot)
     {
         currentSlot = slot;
+    }
+    
+    public void LoadFromData(CardData data)
+    {
+    if (data == null)
+    {
+        Debug.LogWarning("Card data is null");
+        return;
+    }
+
+    cardName = data.CardName;
+    attackValue = data.Damage;
+    defenseValue = data.Health;
+    // cardImage = ???
+    // How to deal with card properties like Acidic?
+
+    UpdateCardVisuals();
     }
 }

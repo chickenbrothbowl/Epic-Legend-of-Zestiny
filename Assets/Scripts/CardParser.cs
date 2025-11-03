@@ -33,8 +33,36 @@ public static class CardParser
          int.TryParse(columns[3], out damage);
          int.TryParse(columns[4], out health);
 
-         var acidicToken = columns[5].Trim().ToLower();
-         bool acidic = acidicToken == "1" || acidicToken == "true" || acidicToken == "yes";
+         var acidicToken = columns[5];
+         bool acidic = acidicToken == "1";
+
+         var catchToken = columns[6];
+         bool catchThis = catchToken == "1"; 
+         //"CATCH" renamed due to keyword conflict
+
+         var corrosiveToken = columns[7];
+         bool corrosive = corrosiveToken == "1";
+
+         var finesseToken = columns[8];
+         bool finesse = finesseToken == "1";
+
+         var flyingToken = columns[9];
+         bool flying = flyingToken == "1";
+
+         var gluttenousToken = columns[10];
+         bool gluttenous = gluttenousToken == "1";
+
+         var hardenedToken = columns[11];
+         bool hardened = hardenedToken == "1";
+
+         var harvestToken = columns[12];
+         bool harvest = harvestToken == "1";
+         
+         var juicedToken = columns[13];
+         bool juiced = juicedToken == "1";
+         
+         var juicyToken = columns[14];
+         bool juicy = juicyToken == "1";
 
          var card_data = new CardData
          {
@@ -43,7 +71,16 @@ public static class CardParser
             Cost = cost,
             Damage = damage,
             Health = health,
-            Acidic = acidic
+            Acidic = acidic,
+            Catch = catchThis,
+            Corrosive = corrosive,
+            Finesse = finesse,
+            Flying = flying,
+            Gluttenous = gluttenous,
+            Hardened = hardened,
+            Harvest = harvest,
+            Juiced = juiced,
+            Juicy = juicy
          };
 
          cards.Add(card_data);
@@ -68,6 +105,15 @@ public class CardData
    public int Damage { get; set; }
    public int Health { get; set; }
    public bool Acidic { get; set; }
+   public bool Catch { get; set; }
+   public bool Corrosive { get; set; }
+   public bool Finesse { get; set; }   
+   public bool Flying { get; set; }
+   public bool Gluttenous { get; set; }
+   public bool Hardened { get; set; }
+   public bool Harvest { get; set; }
+   public bool Juiced { get; set; }
+   public bool Juicy { get; set; }
 
    public virtual void Use()
     {

@@ -216,4 +216,21 @@ public class Card : MonoBehaviour
 	}
 	public void AttackPlayer(){
 	}
+    
+    public void LoadFromData(CardData data)
+    {
+    if (data == null)
+    {
+        Debug.LogWarning("Card data is null");
+        return;
+    }
+
+    cardName = data.CardName;
+    attackValue = data.Damage;
+    defenseValue = data.Health;
+    // cardImage = ???
+    // How to deal with card properties like Acidic?
+
+    UpdateCardVisuals();
+    }
 }

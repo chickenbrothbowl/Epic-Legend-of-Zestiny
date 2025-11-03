@@ -43,7 +43,6 @@ public class DeckLayout : MonoBehaviour
     public void DrawCard()
     {
         if (cards.Count == 0) return;
-        StopAllCoroutines();
         GameObject card = cards[cards.Count - 1];
         cards.Remove(card);
         previousChildCount--;

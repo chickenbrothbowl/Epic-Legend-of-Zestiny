@@ -9,6 +9,8 @@ public class CardHandLayout : MonoBehaviour
     public float yIncrement = 0.2f;
     public float animationSpeed = 5f; // Speed of the animation
     public bool centerCards = true; // Center the hand around the parent position
+    // New: fixed angle for the whole hand (in degrees, X axis for 2D)
+	[SerializeField] float handAngleDeg = 90f;
 
     private int previousChildCount = 0;
 
@@ -38,54 +40,54 @@ public class CardHandLayout : MonoBehaviour
         }
     }
 
+	public void ArrangeCards()
+	{
+    	if (cards.Count == 0) return;
 
-    public void ArrangeCards()
-    {
-        if (cards.Count == 0) return;
+    	Debug.Log($"[CardHandLayout] ArrangeCards called for {cards.Count} cards");
+    	StopAllCoroutines();
 
-        Debug.Log($"[CardHandLayout] ArrangeCards called for {cards.Count} cards");
-        StopAllCoroutines();
+    	float totalWidth = (cards.Count - 1) * xSpacing;
+    	float startOffset = centerCards ? -totalWidth / 2f : 0f;
 
-        // Calculate the offset to center the cards
-        float totalWidth = (cards.Count - 1) * xSpacing;
-        float startOffset = centerCards ? -totalWidth / 2f : 0f;
+    	// New: compute the target rotation once
+    	Quaternion targetRot = Quaternion.Euler(handAngleDeg, 0f, 0f);
 
-        for (int i = 0; i < cards.Count; i++)
-        {
-            Vector3 targetPosition = transform.position;
-            targetPosition.x += startOffset + (i * xSpacing);
-            targetPosition.y += i * yIncrement;
-			
-            
-            // Animate to the target position
-            StartCoroutine(AnimateToPosition(cards[i], targetPosition));
-        }
-    }
+    	for (int i = 0; i < cards.Count; i++)
+    	{
+        	Vector3 targetPos = transform.position;
+        	targetPos.x += startOffset + (i * xSpacing);
+        	targetPos.y += i * yIncrement;
 
-    IEnumerator AnimateToPosition(GameObject card, Vector3 targetPosition)
-    {
-        if (card == null) yield break;
-		
+        	StartCoroutine(AnimateTo(card: cards[i], targetPosition: targetPos, targetRotation: targetRot));
+    	}
+}
 
-        int frameCount = 0;
+	IEnumerator AnimateTo(GameObject card, Vector3 targetPosition, Quaternion targetRotation)
+	{
+    	if (card == null) yield break;
 
-        while (Vector3.Distance(card.transform.position, targetPosition) > 0.01f && card.transform.parent == this.transform)
-        {
-            // Clamp lerp factor to prevent instant snapping on frame time spikes
-            float lerpFactor = Mathf.Min(Time.deltaTime * animationSpeed, 0.5f);
-            card.transform.position = Vector3.Lerp(
-                card.transform.position,
-                targetPosition,
-                lerpFactor
-            );
-            frameCount++;
-            yield return null;
-        }
+    	int frameCount = 0;
 
-        Debug.Log($"[CardHandLayout] Animation completed for {card.name} in {frameCount} frames");
-		if (card.transform.parent == this.transform){
-        card.transform.position = targetPosition;
-		}
-        // Snap to final position
-    }
+    	while (card.transform.parent == this.transform &&
+           (Vector3.Distance(card.transform.position, targetPosition) > 0.01f ||
+            Quaternion.Angle(card.transform.rotation, targetRotation) > 0.5f))
+    	{
+        	float t = Mathf.Min(Time.deltaTime * animationSpeed, 0.5f);
+
+        	card.transform.position = Vector3.Lerp(card.transform.position, targetPosition, t);
+        	card.transform.rotation = Quaternion.Slerp(card.transform.rotation, targetRotation, t);
+
+        	frameCount++;
+        	yield return null;
+    	}
+
+    if (card.transform.parent == this.transform)
+    	{
+        	card.transform.position = targetPosition;
+        	card.transform.rotation = targetRotation;
+    	}
+
+    Debug.Log($"[CardHandLayout] Animation completed for {card.name} in {frameCount} frames");
+	}
 }

@@ -684,8 +684,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 427852560}
-  - component: {fileID: 427852562}
   - component: {fileID: 427852561}
+  - component: {fileID: 427852562}
   m_Layer: 0
   m_Name: Card Manager
   m_TagString: Untagged
@@ -717,11 +717,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 427852559}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e3897cf3958ee134ea87b2e6bb11250a, type: 3}
+  m_Script: {fileID: 11500000, guid: 4af404f2b378e6a47ad9e81fdcd42a25, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CardManager
-  Card: {fileID: 1816885511}
-  cardParent: {fileID: 1554178401}
+  m_EditorClassIdentifier: Assembly-CSharp::CardLoader
 --- !u!114 &427852562
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -731,9 +729,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 427852559}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4af404f2b378e6a47ad9e81fdcd42a25, type: 3}
+  m_Script: {fileID: 11500000, guid: e3897cf3958ee134ea87b2e6bb11250a, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CardLoader
+  m_EditorClassIdentifier: Assembly-CSharp::CardManager
+  Card: {fileID: 1816885511}
+  cardParent: {fileID: 1554178401}
 --- !u!1 &448153718
 GameObject:
   m_ObjectHideFlags: 0

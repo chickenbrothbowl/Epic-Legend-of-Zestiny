@@ -4,8 +4,8 @@ public class GameBoard : MonoBehaviour
 {
     public CardSlot[] playerSlots;
     public CardSlot[] enemySlots;
+	public GameStateMonitor monitor;
 
-    public bool isPlayerTurn;
     
     void Start()
     {
@@ -21,16 +21,11 @@ public class GameBoard : MonoBehaviour
         
     }
 
-    void EndTurn()
-    {
-        isPlayerTurn = !isPlayerTurn;
-    }
-
 
 	[ContextMenu("Proccess Attacks")]
-    void DoAttacks()
+    public void DoAttacks()
     {
-        if (isPlayerTurn)
+        if (monitor.isPlayerTurn)
         {
             DoPlayerAttacks();
             DoEnemyAttacks();

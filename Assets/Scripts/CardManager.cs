@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public class CardManager : MonoBehaviour
 {
-    public GameObject Card;
+    public GameObject card;
     public Transform cardParent;
 
     void Start()
@@ -12,7 +12,7 @@ public class CardManager : MonoBehaviour
 
         foreach (var cardData in cards)
         {
-            GameObject cardObj = Instantiate(Card, cardParent);
+            GameObject cardObj = Instantiate(card, cardParent);
             Card cardComponent = cardObj.GetComponent<Card>();
             cardComponent.LoadFromData(cardData);
         }

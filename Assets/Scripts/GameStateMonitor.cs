@@ -19,7 +19,8 @@ public class GameStateMonitor : MonoBehaviour
 
     void DoEnemyTurn()
     {
-        
+        juiceAmnt++;
+        EndTurn();
     }
 
     void EndTurn()

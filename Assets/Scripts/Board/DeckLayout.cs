@@ -27,6 +27,10 @@ public class DeckLayout : MonoBehaviour
         }
     }
 
+	void OnMouseDown(){
+		DrawCard();
+	}
+
     void UpdateCardsArray()
     {
         cards = new List<GameObject>();

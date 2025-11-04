@@ -1,62 +1,24 @@
 using UnityEngine;
 
+// GameBoard now just coordinates
 public class GameBoard : MonoBehaviour
 {
-    public CardSlot[] playerSlots;
-    public CardSlot[] enemySlots;
-	public GameStateMonitor monitor;
+    public BattleSide playerSide;
+    public BattleSide enemySide;
+    public GameStateMonitor monitor;
 
-    
-    void Start()
-    {
-        // Initialize slots if not set in inspector
-        CardSlot[] cardSlots = GetComponentsInChildren<CardSlot>();
-        int numSlots = cardSlots.Length;
-        playerSlots = cardSlots[0..(numSlots / 2)];
-        enemySlots = cardSlots[(numSlots/2)..];
-    }
-
-    void Update()
-    {
-        
-    }
-
-
-	[ContextMenu("Proccess Attacks")]
+    [ContextMenu("Process Attacks")]
     public void DoAttacks()
     {
         if (monitor.isPlayerTurn)
         {
-            DoPlayerAttacks();
-            DoEnemyAttacks();
+            playerSide.AttackOpposingSide(enemySide);
+            enemySide.AttackOpposingSide(playerSide);
         }
         else
         {
-            DoEnemyAttacks();
-            DoPlayerAttacks();
+            enemySide.AttackOpposingSide(playerSide);
+            playerSide.AttackOpposingSide(enemySide);
         }
     }
-
-    void DoPlayerAttacks()
-    {
-        for (int i = 0; i < playerSlots.Length; i++)
-        {
-			if (!playerSlots[i].IsEmpty){
-				if (!enemySlots[i].IsEmpty){
-					playerSlots[i].currentCard.AttackCard(enemySlots[i].currentCard);
-				} else {
-					playerSlots[i].currentCard.AttackPlayer();
-				}
-			}
-        }
-    }
-
-    void DoEnemyAttacks()
-    {
-        for (int i = 0; i < enemySlots.Length; i++)
-        {
-                
-        }
-    }
-    
 }

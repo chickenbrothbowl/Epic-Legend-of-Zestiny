@@ -8,6 +8,7 @@ public class Card : MonoBehaviour
     public Sprite cardImage;
     public int attackValue;
     public int defenseValue;
+	public int cost;
     
     [Header("Visual Components")]
     public Renderer cardImageRenderer;
@@ -208,14 +209,6 @@ public class Card : MonoBehaviour
     {
         currentSlot = slot;
     }
-
-	public void AttackCard(Card card){
-		// TODO: Do animations
-		card.defenseValue -= attackValue;
-		return;
-	}
-	public void AttackPlayer(){
-	}
     
     public void LoadFromData(CardData data)
     {
@@ -228,6 +221,7 @@ public class Card : MonoBehaviour
     cardName = data.CardName;
     attackValue = data.Damage;
     defenseValue = data.Health;
+	cost = data.Cost;
     // cardImage = ???
     // How to deal with card properties like Acidic?
 

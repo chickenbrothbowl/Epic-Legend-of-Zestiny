@@ -2,9 +2,10 @@ using UnityEngine;
 
 public class GameStateMonitor : MonoBehaviour
 {
-    public int juiceAmnt = 1;
-    public int playerLife = 5;
-    public int enemyLife = 5;
+    public int maxJuiceAmnt = 1;
+    public Player player;
+    public Player enemy;
+    public EnemyDeck enemyDeck;
     public bool isPlayerTurn = true;
     public GameBoard board;
 
@@ -19,8 +20,9 @@ public class GameStateMonitor : MonoBehaviour
 
     void DoEnemyTurn()
     {
-        juiceAmnt++;
+        enemyDeck.DeckPlay();
         EndTurn();
+        maxJuiceAmnt++;
     }
 
     void EndTurn()

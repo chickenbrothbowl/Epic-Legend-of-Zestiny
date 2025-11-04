@@ -15,6 +15,7 @@ public class CardManager : MonoBehaviour
             GameObject cardObj = Instantiate(card, cardParent);
             Card cardComponent = cardObj.GetComponent<Card>();
             cardComponent.LoadFromData(cardData);
+			cardObj.name = cardComponent.cardName;
         }
     }
 }

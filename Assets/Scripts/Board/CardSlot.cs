@@ -97,6 +97,8 @@ public class CardSlot : MonoBehaviour
         currentCard = card;
         card.transform.SetParent(transform);
         card.transform.localPosition = Vector3.zero;
+		card.transform.localRotation = Quaternion.identity;
+
         StopAllCoroutines();
     }
     

@@ -44,7 +44,6 @@ public class CardHandLayout : MonoBehaviour
 	{
     	if (cards.Count == 0) return;
 
-    	Debug.Log($"[CardHandLayout] ArrangeCards called for {cards.Count} cards");
     	StopAllCoroutines();
 
     	float totalWidth = (cards.Count - 1) * xSpacing;
@@ -87,7 +86,5 @@ public class CardHandLayout : MonoBehaviour
         	card.transform.position = targetPosition;
         	card.transform.rotation = targetRotation;
     	}
-
-    Debug.Log($"[CardHandLayout] Animation completed for {card.name} in {frameCount} frames");
 	}
 }

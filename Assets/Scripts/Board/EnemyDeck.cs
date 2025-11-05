@@ -1,6 +1,8 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 public class EnemyDeck : MonoBehaviour
 {
     public List<GameObject> cards;
@@ -8,9 +10,12 @@ public class EnemyDeck : MonoBehaviour
     public float animationSpeed = 5f; // Speed of the animation
     private int previousChildCount = 0;
     public BattleSide Side;
+    public CardManager cardManager;
+    public string enemyDeckPath = "Scripts/Data/EnemyDecks"; 
 
     void Start()
     {
+        PopulateDeck();
         UpdateCardsArray();
         ArrangeCards();
     }
@@ -93,8 +98,47 @@ public class EnemyDeck : MonoBehaviour
             );
             yield return null;
         }
-        
+
         // Snap to final position
         card.transform.position = targetPosition;
+    }
+    
+     void PopulateDeck()
+    {
+        List<CardData> masterList = CardParser.ParseCsv();
+
+        string folderPath = Path.Combine(Application.dataPath, enemyDeckPath.Replace("Assets/", ""));
+
+        string[] csvPaths = Directory.GetFiles(folderPath, "*.csv");
+
+        if (csvPaths.Length == 0)
+        {
+            Debug.LogError($"No decks found at path: {enemyDeckPath}");
+            return;
+        }
+
+        string randomDeck = csvPaths[Random.Range(0, csvPaths.Length)];
+        Debug.Log("EnemyDeck is: " + Path.GetFileName(randomDeck));
+
+        string[] rawLines = File.ReadAllLines(randomDeck);
+        IEnumerable<string> lines = rawLines
+            .Select(l => l.Trim())
+            .Where(l => !string.IsNullOrEmpty(l));
+
+        foreach (string id in lines)
+        {
+            string cardId = id;
+
+            CardData data = masterList.Find(cd => cd.CardID == cardId);
+
+            GameObject cardObj = Instantiate(cardManager.card, transform);
+            Card c = cardObj.GetComponent<Card>();
+            if (c != null)
+            {
+                c.LoadFromData(data);
+                cardObj.name = c.cardName;
+            }
+            cards.Add(cardObj);
+        }
     }
 }

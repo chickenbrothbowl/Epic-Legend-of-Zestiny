@@ -33,9 +33,14 @@ public class Card : MonoBehaviour
     private int oldDef;
 	private Sprite oldImage;
 	
+
 	public CardSlot slotUnderCard;
 	public CardSlot oldSlotUnderCard;
     
+
+	public JuiceLevel juiceLevel;
+
+
     void Start()
     {
         mainCamera = Camera.main;
@@ -145,9 +150,8 @@ public class Card : MonoBehaviour
             Transform parent = transform.parent;
             CardHandLayout hand = parent.GetComponent<CardHandLayout>();
         
-            if (targetSlot != null && targetSlot.IsEmpty)
+            if (targetSlot != null && targetSlot.CanPlay(this))
             {
-                
                 if (hand)
                 {
                     hand.cards.Remove(transform.gameObject);

@@ -20,14 +20,21 @@ public class CardSlot : MonoBehaviour
     private LineRenderer borderLine;
     private Material borderMaterial;
     private static readonly int EmissionColor = Shader.PropertyToID("_EmissionColor");
+
+    private JuiceLevel juice;
     
     public bool IsEmpty => currentCard == null;
     
     void Start()
     {
+        juice = transform.parent.parent.GetComponent<GameBoard>().monitor.juice;
         CreateBorderFrame();
         SetBorderGlow(normalColor, 0);
     }
+
+	public bool CanPlay(Card card){
+		return IsEmpty && card.cost <= juice.juiceAmnt;
+	}
     
     void CreateBorderFrame()
     {
@@ -93,7 +100,7 @@ public class CardSlot : MonoBehaviour
     public void PlaceCard(Card card)
     {
         if (!IsEmpty) return;
-        
+        juice.juiceAmnt -= card.cost;
         currentCard = card;
         card.transform.SetParent(transform);
         card.transform.localPosition = Vector3.zero;

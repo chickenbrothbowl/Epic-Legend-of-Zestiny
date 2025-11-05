@@ -5,6 +5,7 @@ public class GameStateMonitor : MonoBehaviour
     public int maxJuiceAmnt = 1;
     public Player player;
     public Player enemy;
+	public JuiceLevel juice;
     public EnemyDeck enemyDeck;
     public bool isPlayerTurn = true;
     public GameBoard board;
@@ -13,6 +14,7 @@ public class GameStateMonitor : MonoBehaviour
     {
         if (isPlayerTurn)
         {
+			board.DoAttacks();
             EndTurn();
             DoEnemyTurn();
         }
@@ -23,18 +25,21 @@ public class GameStateMonitor : MonoBehaviour
         enemyDeck.DeckPlay();
         EndTurn();
         maxJuiceAmnt++;
+		if (maxJuiceAmnt > 10){
+			maxJuiceAmnt = 10;
+		}
+		juice.SetJuice(maxJuiceAmnt);
     }
 
     void EndTurn()
     {
-        board.DoAttacks();
         isPlayerTurn = !isPlayerTurn;
     }
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        juice.SetJuice(maxJuiceAmnt);
     }
 
     // Update is called once per frame

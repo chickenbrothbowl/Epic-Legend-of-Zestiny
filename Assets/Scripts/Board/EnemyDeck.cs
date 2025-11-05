@@ -51,6 +51,7 @@ public class EnemyDeck : MonoBehaviour
     public void DeckPlay()
     {
         if (cards.Count == 0) return;
+		Debug.Log("DeckPlayed");
         GameObject card = cards[cards.Count - 1];
         cards.Remove(card);
         previousChildCount--;

@@ -360,6 +360,54 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 4876410138526468142}
   m_maskType: 0
+--- !u!1 &3670633466806016349
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2603165615808073138}
+  - component: {fileID: 519312607169624841}
+  m_Layer: 0
+  m_Name: LemonSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2603165615808073138
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3670633466806016349}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.426, z: -1.2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 8024109272320491021}
+  m_Father: {fileID: 5738469664942356658}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &519312607169624841
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3670633466806016349}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 110e45e927b794537bbadc4d07b87b30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  itemPrefab: {fileID: 4117870168054510557}
+  card: {fileID: 1506684640594805134}
+  spacing: 0.1
 --- !u!1 &4793096651551360451
 GameObject:
   m_ObjectHideFlags: 0
@@ -667,6 +715,7 @@ Transform:
   - {fileID: 1934144794719113887}
   - {fileID: 6047404385239061614}
   - {fileID: 1376919116223802640}
+  - {fileID: 2603165615808073138}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &3666578251115865637
@@ -762,6 +811,7 @@ MonoBehaviour:
   cardImage: {fileID: 21300000, guid: e975b408ad31840079055cf686ca8f88, type: 3}
   attackValue: 0
   defenseValue: 1
+  cost: 0
   cardImageRenderer: {fileID: 7930792692625193811}
   nameText: {fileID: 3330805231636401695}
   attackText: {fileID: 3870172314176180917}
@@ -776,3 +826,46 @@ MonoBehaviour:
   isDraggable: 1
   slotUnderCard: {fileID: 0}
   oldSlotUnderCard: {fileID: 0}
+--- !u!1001 &8942393460866468397
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 2603165615808073138}
+    m_Modifications:
+    - target: {fileID: 1387847178334794784, guid: 61f04d025915944ccbf5143502753b5d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1387847178334794784, guid: 61f04d025915944ccbf5143502753b5d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1387847178334794784, guid: 61f04d025915944ccbf5143502753b5d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4988966257834981872, guid: 61f04d025915944ccbf5143502753b5d, type: 3}
+      propertyPath: m_Name
+      value: lemononly
+      objectReference: {fileID: 0}
+    - target: {fileID: 8563021616001624769, guid: 61f04d025915944ccbf5143502753b5d, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 61f04d025915944ccbf5143502753b5d, type: 3}
+--- !u!1 &4117870168054510557 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4988966257834981872, guid: 61f04d025915944ccbf5143502753b5d, type: 3}
+  m_PrefabInstance: {fileID: 8942393460866468397}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &8024109272320491021 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1387847178334794784, guid: 61f04d025915944ccbf5143502753b5d, type: 3}
+  m_PrefabInstance: {fileID: 8942393460866468397}
+  m_PrefabAsset: {fileID: 0}

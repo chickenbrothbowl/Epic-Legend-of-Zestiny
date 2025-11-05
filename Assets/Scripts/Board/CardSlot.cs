@@ -97,7 +97,7 @@ public class CardSlot : MonoBehaviour
         currentCard = card;
         card.transform.SetParent(transform);
         card.transform.localPosition = Vector3.zero;
-		card.transform.localRotation = Quaternion.identity;
+		card.transform.localEulerAngles = new Vector3(90, 0, 0); // Z-axis rotation for 2D
 
         StopAllCoroutines();
     }

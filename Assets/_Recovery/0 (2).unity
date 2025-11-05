@@ -706,70 +706,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0025adc5b19374c85bfea75177ba7d8b, type: 3}
---- !u!4 &400115199 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5835184118292849591, guid: ace913233e4549448a8e7cf0eac95f78, type: 3}
-  m_PrefabInstance: {fileID: 919455822}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &427852559
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 427852560}
-  - component: {fileID: 427852561}
-  - component: {fileID: 427852562}
-  m_Layer: 0
-  m_Name: Card Manager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &427852560
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 427852559}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.22919, y: -2, z: 0.30678}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &427852561
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 427852559}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4af404f2b378e6a47ad9e81fdcd42a25, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CardLoader
---- !u!114 &427852562
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 427852559}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e3897cf3958ee134ea87b2e6bb11250a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CardManager
-  Card: {fileID: 1816885511}
-  cardParent: {fileID: 1554178401}
 --- !u!1 &448153718
 GameObject:
   m_ObjectHideFlags: 0
@@ -965,11 +901,6 @@ PrefabInstance:
 --- !u!4 &920493073 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5738469664942356658, guid: 5cad9f05812fb4598ab8b67bc1e4c41e, type: 3}
-  m_PrefabInstance: {fileID: 1849044436}
-  m_PrefabAsset: {fileID: 0}
---- !u!23 &920493076 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 6918855117024373064, guid: 5cad9f05812fb4598ab8b67bc1e4c41e, type: 3}
   m_PrefabInstance: {fileID: 1849044436}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &954796450 stripped
@@ -1483,7 +1414,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1554178401}
   - component: {fileID: 1554178402}
-  - component: {fileID: 1554178403}
   m_Layer: 0
   m_Name: Hand
   m_TagString: Untagged
@@ -1526,20 +1456,6 @@ MonoBehaviour:
   yIncrement: 0.1
   animationSpeed: 5
   centerCards: 1
---- !u!114 &1554178403
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1554178400}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e3897cf3958ee134ea87b2e6bb11250a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CardManager
-  Card: {fileID: 0}
-  cardParent: {fileID: 0}
 --- !u!4 &1562367811 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5738469664942356658, guid: 5cad9f05812fb4598ab8b67bc1e4c41e, type: 3}
@@ -1701,11 +1617,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4130865657531461969, guid: 0025adc5b19374c85bfea75177ba7d8b, type: 3}
   m_PrefabInstance: {fileID: 299068227}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1816885511 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7124592944193891571, guid: 5cad9f05812fb4598ab8b67bc1e4c41e, type: 3}
-  m_PrefabInstance: {fileID: 1087333898453679530}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1849044436
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1714,10 +1625,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1554178401}
     m_Modifications:
-    - target: {fileID: 1506684640594805134, guid: 5cad9f05812fb4598ab8b67bc1e4c41e, type: 3}
-      propertyPath: cardRenderer
-      value: 
-      objectReference: {fileID: 920493076}
     - target: {fileID: 5738469664942356658, guid: 5cad9f05812fb4598ab8b67bc1e4c41e, type: 3}
       propertyPath: m_LocalScale.x
       value: 2.8
@@ -2142,10 +2049,6 @@ PrefabInstance:
       propertyPath: boardHeight
       value: -0.95
       objectReference: {fileID: 0}
-    - target: {fileID: 1506684640594805134, guid: 5cad9f05812fb4598ab8b67bc1e4c41e, type: 3}
-      propertyPath: cardRenderer
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 5738469664942356658, guid: 5cad9f05812fb4598ab8b67bc1e4c41e, type: 3}
       propertyPath: m_LocalScale.x
       value: 2.8
@@ -2314,4 +2217,3 @@ SceneRoots:
   - {fileID: 1554178401}
   - {fileID: 1281726977}
   - {fileID: 1026084868}
-  - {fileID: 427852560}

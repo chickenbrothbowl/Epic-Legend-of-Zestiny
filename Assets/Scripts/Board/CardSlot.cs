@@ -78,7 +78,7 @@ public class CardSlot : MonoBehaviour
         SetBorderGlow(normalColor, 0);
     }
     
-    void SetBorderGlow(Color color, float intensity)
+    public void SetBorderGlow(Color color, float intensity)
     {
         if (borderMaterial != null)
         {
@@ -97,6 +97,7 @@ public class CardSlot : MonoBehaviour
         currentCard = card;
         card.transform.SetParent(transform);
         card.transform.localPosition = Vector3.zero;
+        StopAllCoroutines();
     }
     
     public Card RemoveCard()

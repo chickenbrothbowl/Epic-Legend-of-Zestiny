@@ -107,6 +107,11 @@ public class CardSlot : MonoBehaviour
 		card.transform.localEulerAngles = new Vector3(90, 0, 0); // Z-axis rotation for 2D
 
         StopAllCoroutines();
+
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.PlayCardPlacement();
+        }
     }
     
     public Card RemoveCard()

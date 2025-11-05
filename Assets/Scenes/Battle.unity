@@ -1264,9 +1264,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameStateMonitor
   maxJuiceAmnt: 1
-  player: {fileID: 0}
-  enemy: {fileID: 0}
-  enemyDeck: {fileID: 0}
+  player: {fileID: 1085155750}
+  enemy: {fileID: 1202280496}
+  enemyDeck: {fileID: 1857985311}
   isPlayerTurn: 1
   board: {fileID: 2014053478}
 --- !u!136 &1763896163
@@ -1366,7 +1366,7 @@ MonoBehaviour:
   cards: []
   yIncrement: 0.1
   animationSpeed: 5
-  Side: {fileID: 0}
+  Side: {fileID: 1219700271}
   cardManager: {fileID: 427852562}
   enemyDeckPath: Scripts/Data/EnemyDecks
 --- !u!4 &1880090203 stripped

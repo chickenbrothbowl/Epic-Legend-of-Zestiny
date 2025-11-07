@@ -134,8 +134,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 2
-  m_fontSizeBase: 2
+  m_fontSize: 2.5
+  m_fontSizeBase: 2.5
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -172,7 +172,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 9.575311, y: 2.777368, z: 10.173615, w: 2.0197794}
+  m_margin: {x: 9.575311, y: 2.7488985, z: 10.173615, w: 2.0387614}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   _SortingLayer: 0
@@ -313,8 +313,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 2
-  m_fontSizeBase: 2
+  m_fontSize: 2.5
+  m_fontSizeBase: 2.5
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -351,7 +351,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 10.170185, y: 2.7809708, z: 9.583594, w: 2.052881}
+  m_margin: {x: 10.15625, y: 2.757249, z: 9.583594, w: 2.052881}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   _SortingLayer: 0
@@ -386,7 +386,7 @@ Transform:
   m_GameObject: {fileID: 3670633466806016349}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.426, z: -1.2}
+  m_LocalPosition: {x: 0, y: -0.415, z: -1.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -407,7 +407,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   itemPrefab: {fileID: 4117870168054510557}
   card: {fileID: 1506684640594805134}
-  spacing: 0.1
+  spacing: 0.15
 --- !u!1 &4793096651551360451
 GameObject:
   m_ObjectHideFlags: 0
@@ -631,8 +631,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 1.6
-  m_fontSizeBase: 1.6
+  m_fontSize: 1.8
+  m_fontSizeBase: 1.8
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -669,7 +669,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 9.528331, y: 1.9765252, z: 9.496476, w: 2.8806283}
+  m_margin: {x: 9.528331, y: 1.9670312, z: 9.4966345, w: 2.8806283}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   _SortingLayer: 0
@@ -751,7 +751,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 325ce92335435405ba07c5a5b9cf8b26, type: 2}
+  - {fileID: 2100000, guid: 76a0bc740c16f4e4abf3cbccf23935c5, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -826,6 +826,7 @@ MonoBehaviour:
   isDraggable: 1
   slotUnderCard: {fileID: 0}
   oldSlotUnderCard: {fileID: 0}
+  juiceLevel: {fileID: 0}
 --- !u!1001 &8942393460866468397
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -834,6 +835,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2603165615808073138}
     m_Modifications:
+    - target: {fileID: 1387847178334794784, guid: 61f04d025915944ccbf5143502753b5d, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1387847178334794784, guid: 61f04d025915944ccbf5143502753b5d, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.4
+      objectReference: {fileID: 0}
     - target: {fileID: 1387847178334794784, guid: 61f04d025915944ccbf5143502753b5d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
@@ -850,6 +859,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: lemononly
       objectReference: {fileID: 0}
+    - target: {fileID: 8563021616001624769, guid: 61f04d025915944ccbf5143502753b5d, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 583b4c8b8d67e4b429d593b840cd5b8a, type: 3}
     - target: {fileID: 8563021616001624769, guid: 61f04d025915944ccbf5143502753b5d, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 

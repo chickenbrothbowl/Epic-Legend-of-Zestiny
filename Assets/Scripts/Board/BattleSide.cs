@@ -24,32 +24,60 @@ public class BattleSide : MonoBehaviour
                 if (i < opponent.slots.Length && !opponent.slots[i].IsEmpty)
                 {
                     Card defender = opponent.slots[i].currentCard;
-                    CombatResolver.CardVsCard(attacker, defender);
+                    CombatResolver.CardVsCard(attacker, defender, opponent.player, this.player);
                 }
                 else
                 {
-                    CombatResolver.CardVsPlayer(attacker, opponent.player);
+                    CombatResolver.CardVsPlayer(attacker, opponent.player, this.player);
                 }
             }
         }
     }
-
-
 }
 
 
 // Separates combat logic into its own class
 public static class CombatResolver
+// Combat keywords: acidic, corrosive, finesse, flying, hardened, pummel, reach, vampire
+// ETB keywords:
 {
-    public static void CardVsCard(Card attacker, Card defender)
+    public static void CardVsCard(Card attacker, Card defender, Player target, Player you)
     {
         Debug.Log("Card Vs Card");
-        defender.defenseValue -= attacker.attackValue;
+
+        if (attacker.vampire)
+        {
+            if (!defender.flying && !defender.reach)
+            {
+                target.life -= attacker.attackValue;
+                you.life += attacker.attackValue;
+            }
+            else
+            {
+                defender.defenseValue -= attacker.attackValue;
+                you.life += attacker.attackValue;
+            }
+        }
+        else if (attacker.flying && !defender.flying && !defender.reach)
+        {
+            target.life -= attacker.attackValue;
+        }
+        else if (attacker.pummel && (attacker.attackValue > defender.defenseValue))
+        {
+            target.life -= attacker.attackValue - defender.defenseValue;
+            defender.defenseValue -= attacker.attackValue;
+        }
+        else { defender.defenseValue -= attacker.attackValue; }
     }
-    
-    public static void CardVsPlayer(Card attacker, Player target)
+
+    public static void CardVsPlayer(Card attacker, Player target, Player you)
     {
         Debug.Log("Card Vs Player");
         target.life -= attacker.attackValue;
+        
+        if (attacker.vampire)
+        {
+        you.life += attacker.attackValue;
+        }
     }
 }

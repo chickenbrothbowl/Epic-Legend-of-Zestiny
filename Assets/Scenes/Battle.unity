@@ -1077,7 +1077,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1554178401}
   - component: {fileID: 1554178402}
-  - component: {fileID: 1554178403}
   m_Layer: 0
   m_Name: Hand
   m_TagString: Untagged

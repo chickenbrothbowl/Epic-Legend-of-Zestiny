@@ -7,6 +7,7 @@ public class DeckLayout : MonoBehaviour
     public List<GameObject> cards;
     public float yIncrement = 0.2f;
     public float animationSpeed = 5f; // Speed of the animation
+	public bool canDraw = false;
     private int previousChildCount = 0;
     public GameObject hand;
 
@@ -28,7 +29,9 @@ public class DeckLayout : MonoBehaviour
     }
 
 	void OnMouseDown(){
-		DrawCard();
+		if (canDraw){
+			DrawCard();
+		}
 	}
 
     void UpdateCardsArray()
@@ -92,7 +95,6 @@ public class DeckLayout : MonoBehaviour
             );
             yield return null;
         }
-        
         // Snap to final position
         card.transform.position = targetPosition;
     }

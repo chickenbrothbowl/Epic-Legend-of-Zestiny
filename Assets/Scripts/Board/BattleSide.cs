@@ -39,6 +39,7 @@ public class BattleSide : MonoBehaviour
 // Separates combat logic into its own class
 public static class CombatResolver
 // Combat keywords: acidic, corrosive, finesse, flying, hardened, pummel, reach, vampire
+// ETB keywords:
 {
     public static void CardVsCard(Card attacker, Card defender, Player target, Player you)
     {

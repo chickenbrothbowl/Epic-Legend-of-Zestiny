@@ -403,7 +403,7 @@ MonoBehaviour:
   normalAngleX: 40
   tiltedAngleX: 85
   screenBottomThreshold: 150
-  screenBottomThresholdUp: 300
+  screenBottomThresholdUp: 275
   smoothSpeed: 5
 --- !u!1001 &299068227
 PrefabInstance:
@@ -1077,6 +1077,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1554178401}
   - component: {fileID: 1554178402}
+  - component: {fileID: 1554178403}
   m_Layer: 0
   m_Name: Hand
   m_TagString: Untagged

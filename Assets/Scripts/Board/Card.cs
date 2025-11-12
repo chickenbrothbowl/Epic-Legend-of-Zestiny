@@ -59,6 +59,16 @@ public class Card : MonoBehaviour
 	public JuiceLevel juiceLevel;
 
 
+	private Sprite oldImage;
+	
+
+	public CardSlot slotUnderCard;
+	public CardSlot oldSlotUnderCard;
+    
+
+	public JuiceLevel juiceLevel;
+
+
     void Start()
     {
         mainCamera = Camera.main;
@@ -81,9 +91,14 @@ public class Card : MonoBehaviour
 		if (defenseValue <= 0){
 			Destroy(gameObject);
 		}
+		// If defense is 0, destroy the card
+		if (defenseValue <= 0){
+			Destroy(gameObject);
+		}
         oldName = cardName;
         oldAtk = attackValue;
         oldDef = defenseValue;
+		oldImage = cardImage;
 		oldImage = cardImage;
     }
     
@@ -136,6 +151,19 @@ public class Card : MonoBehaviour
     			oldSlotUnderCard = slotUnderCard;
 			}
 			
+			slotUnderCard = FindSlotUnderCard();
+			if (oldSlotUnderCard != slotUnderCard){
+    			// Turn off the old slot's glow if it exists
+    			if (oldSlotUnderCard != null){
+        		oldSlotUnderCard.SetBorderGlow(oldSlotUnderCard.normalColor, 0);
+    			}
+    			// Turn on the new slot's glow if it exists
+    			if (slotUnderCard != null){
+        			slotUnderCard.SetBorderGlow(slotUnderCard.hoverColor, slotUnderCard.glowIntensity);
+    			} 
+    			oldSlotUnderCard = slotUnderCard;
+			}
+			
         }
     }
     
@@ -149,6 +177,9 @@ public class Card : MonoBehaviour
                 targetPosition, 
                 dragLiftSpeed * Time.deltaTime
             );
+        }
+		
+        if (cardName != oldName || defenseValue != oldDef || attackValue != oldAtk || cardImage != oldImage)
         }
 		
         if (cardName != oldName || defenseValue != oldDef || attackValue != oldAtk || cardImage != oldImage)
@@ -167,15 +198,23 @@ public class Card : MonoBehaviour
             CardSlot targetSlot = FindSlotUnderCard();
             Transform parent = transform.parent;
             CardHandLayout hand = parent.GetComponent<CardHandLayout>();
+            Transform parent = transform.parent;
+            CardHandLayout hand = parent.GetComponent<CardHandLayout>();
         
+            if (targetSlot != null && targetSlot.CanPlay(this))
             if (targetSlot != null && targetSlot.CanPlay(this))
             {
                 if (hand)
                 {
                     hand.cards.Remove(transform.gameObject);
                 }
+                if (hand)
+                {
+                    hand.cards.Remove(transform.gameObject);
+                }
                 targetSlot.PlaceCard(this);
                 currentSlot = targetSlot;
+                // isDraggable = false;
                 // isDraggable = false;
             }
             else if (currentSlot != null)
@@ -185,6 +224,10 @@ public class Card : MonoBehaviour
             }
             else
             {
+                if (hand)
+                {
+                    hand.ArrangeCards();
+                }
                 if (hand)
                 {
                     hand.ArrangeCards();
@@ -226,6 +269,7 @@ public class Card : MonoBehaviour
         
         return transform.position;
     }
+    
     
     public void SetSlot(CardSlot slot)
     {

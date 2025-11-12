@@ -1,43 +1,69 @@
 using UnityEngine;
-
 public class JuiceLevel : MonoBehaviour
 {
+    [Header("References")]
     public Transform iceCubes;
+    
+    [Header("Settings")]
     public int juiceAmnt;
-    private int oldJuiceAmnt;
+    public float lerpSpeed = 5f;
+    
+    [Header("Scale Settings")]
+    public float maxScale = 176f;
+    
+    [Header("Ice Position Settings")]
+    public float minIceY = -6f;
+    public float maxIceY = 0f;
+    
+    private float targetFullness;
+    private float currentFullness;
+    private Vector3 targetScale;
+    private Vector3 targetIcePos;
 
-    private float fulness;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        fulness = juiceAmnt / 10f;
-        Vector3 scale = transform.localScale;
-        scale.z = 176f * fulness;
-        Vector3 icePos = iceCubes.localPosition;
-        icePos.y = -6f + (6f * fulness);
-        iceCubes.localPosition = icePos;
-        transform.localScale = scale;
-        oldJuiceAmnt = juiceAmnt;
+        // Initialize to current juice amount
+        currentFullness = juiceAmnt / 10f;
+        targetFullness = currentFullness;
+        
+        UpdateTargets();
+        
+        // Set initial values immediately (no lerp on start)
+        transform.localScale = targetScale;
+        iceCubes.localPosition = targetIcePos;
     }
 
     public void SetJuice(int amount)
     {
-        juiceAmnt = amount;
+        juiceAmnt = Mathf.Clamp(amount, 0, 10);
+        targetFullness = juiceAmnt / 10f;
+        UpdateTargets();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if (juiceAmnt != oldJuiceAmnt)
+        // Smoothly lerp towards target fullness
+        if (Mathf.Abs(currentFullness - targetFullness) > 0.001f)
         {
-            fulness = juiceAmnt / 10f;
+            currentFullness = Mathf.Lerp(currentFullness, targetFullness, Time.deltaTime * lerpSpeed);
+            
+            // Calculate current scale and position based on lerped fullness
             Vector3 scale = transform.localScale;
-            scale.z = 176f * fulness;
-            Vector3 icePos = iceCubes.localPosition;
-            icePos.y = -6f + (6f * fulness);
-            iceCubes.localPosition = icePos; 
+            scale.z = maxScale * currentFullness;
             transform.localScale = scale;
-            oldJuiceAmnt = juiceAmnt;
+            
+            Vector3 icePos = iceCubes.localPosition;
+            icePos.y = Mathf.Lerp(minIceY, maxIceY, currentFullness);
+            iceCubes.localPosition = icePos;
         }
+    }
+    
+    private void UpdateTargets()
+    {
+        targetScale = transform.localScale;
+        targetScale.z = maxScale * targetFullness;
+        
+        targetIcePos = iceCubes.localPosition;
+        targetIcePos.y = Mathf.Lerp(minIceY, maxIceY, targetFullness);
     }
 }

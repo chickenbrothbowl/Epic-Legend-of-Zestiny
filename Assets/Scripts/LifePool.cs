@@ -6,7 +6,8 @@ public class LifePool : MonoBehaviour
 {
     public GameObject seed;
     public GameStateMonitor monitor;
-    public int animationSpeed = 5; 
+    public int animationSpeed = 5;
+    public int scoreMax = 5;
     public int counter = 0;
 
     public float offset = -0.025f;
@@ -20,22 +21,38 @@ public class LifePool : MonoBehaviour
     public void MoveCounter(int amnt)
     {
         counter += amnt;
-        counter = Mathf.Clamp(counter, -5, 5);
+        counter = Mathf.Clamp(counter, -scoreMax, scoreMax);
         SendCounterToPosition();
+        if (counter >= scoreMax)
+        {
+            DoWin();
+        }
+
+        if (counter <= -scoreMax)
+        {
+            DoLose();
+        }
+    }
+
+    private void DoWin()
+    {
+        Debug.Log("You win!");
+    }
+
+    private void DoLose()
+    {
+        Debug.Log("You lose!");
     }
 
     private void SendCounterToPosition()
     {
-		Debug.Log("Attemting to Animate!");
         Vector3 targetPos = new Vector3(offset + (increment * counter), 0, 0);
         StartCoroutine(SeedToPosition(targetPos));
     }
     
     IEnumerator SeedToPosition(Vector3 targetPosition)
     {
-		Debug.Log("Animating!1");
         if (seed == null) yield break;
-		Debug.Log("Animating!");
 
         while (Vector3.Distance(seed.transform.localPosition, targetPosition) > 0.01f)
         {

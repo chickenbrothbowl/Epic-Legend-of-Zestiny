@@ -33,7 +33,6 @@ public class GameStateMonitor : MonoBehaviour
 			maxJuiceAmnt = 10;
 		}
 		juice.SetJuice(maxJuiceAmnt);
-
         AudioManager.Instance.JuiceRefilSound();
 		playerDeck.canDraw = true;
     }
@@ -48,6 +47,7 @@ public class GameStateMonitor : MonoBehaviour
     {
         juice.SetJuice(maxJuiceAmnt);
     }
+    
 
     // Update is called once per frame
     void Update()

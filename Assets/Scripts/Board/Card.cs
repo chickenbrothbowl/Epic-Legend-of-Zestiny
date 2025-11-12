@@ -49,13 +49,8 @@ public class Card : MonoBehaviour
     public bool shielded;
     public bool tribal;
     public bool vampire;
-
-
     public CardSlot slotUnderCard;
     public CardSlot oldSlotUnderCard;
-
-
-    public JuiceLevel juiceLevel;
 
 
     void Start()

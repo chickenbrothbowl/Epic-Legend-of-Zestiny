@@ -1,22 +1,24 @@
 using UnityEngine;
 
+// GameBoard now just coordinates
 public class GameBoard : MonoBehaviour
 {
-    public CardSlot[] cardSlots;
-    
-    void Start()
+    public BattleSide playerSide;
+    public BattleSide enemySide;
+    public GameStateMonitor monitor;
+
+    [ContextMenu("Process Attacks")]
+    public void DoAttacks()
     {
-        // Initialize slots if not set in inspector
-        cardSlots = GetComponentsInChildren<CardSlot>();
-    }
-    
-    public CardSlot GetSlot(int index)
-    {
-        return cardSlots[index];
-    }
-    
-    public CardSlot GetEmptySlot()
-    {
-        return System.Array.Find(cardSlots, slot => slot.IsEmpty);
+        if (monitor.isPlayerTurn)
+        {
+            playerSide.AttackOpposingSide(enemySide);
+            enemySide.AttackOpposingSide(playerSide);
+        }
+        else
+        {
+            enemySide.AttackOpposingSide(playerSide);
+            playerSide.AttackOpposingSide(enemySide);
+        }
     }
 }

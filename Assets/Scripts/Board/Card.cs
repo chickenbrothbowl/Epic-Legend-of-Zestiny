@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using System.Linq.Expressions;
 
 public class Card : MonoBehaviour
 {
@@ -8,9 +9,27 @@ public class Card : MonoBehaviour
     public Sprite cardImage;
     public int attackValue;
     public int defenseValue;
+    public int cost;
+    public bool acidic;
+    public bool catch_this;
+    public bool corrosive;
+    public bool finesse;
+    public bool flying;
+    public bool gluttenous;
+    public bool hardened;
+    public bool harvest;
+    public bool juiced;
+    public bool juicy;
+    public bool opportunist;
+    public bool pummel;
+    public bool reach;
+    public bool rotten;
+    public bool shielded;
+    public bool tribal;
+    public bool vampire;
     
     [Header("Visual Components")]
-    public Renderer cardRenderer;
+    public Renderer cardImageRenderer;
     public TextMeshPro nameText;
     public TextMeshPro attackText;
     public TextMeshPro defenseText;
@@ -30,7 +49,16 @@ public class Card : MonoBehaviour
     private string oldName;
     private int oldAtk;
     private int oldDef;
+	private Sprite oldImage;
+	
+
+	public CardSlot slotUnderCard;
+	public CardSlot oldSlotUnderCard;
     
+
+	public JuiceLevel juiceLevel;
+
+
     void Start()
     {
         mainCamera = Camera.main;
@@ -40,18 +68,23 @@ public class Card : MonoBehaviour
     void UpdateCardVisuals()
     {
         // Update card face texture
-        if (cardRenderer != null && cardImage != null)
+        if (cardImageRenderer != null && cardImage != null)
         {
-            cardRenderer.material.mainTexture = cardImage.texture;
+            cardImageRenderer.material.mainTexture = cardImage.texture;
         }
         
         // Update text displays
         if (nameText != null) nameText.text = cardName;
         if (attackText != null) attackText.text = attackValue.ToString();
         if (defenseText != null) defenseText.text = defenseValue.ToString();
+		// If defense is 0, destroy the card
+		if (defenseValue <= 0){
+			Destroy(gameObject);
+		}
         oldName = cardName;
         oldAtk = attackValue;
         oldDef = defenseValue;
+		oldImage = cardImage;
     }
     
 	void OnMouseDown()
@@ -90,6 +123,19 @@ public class Card : MonoBehaviour
                 boardHeight,
                 mousePos.z + dragOffset.z
             );
+			slotUnderCard = FindSlotUnderCard();
+			if (oldSlotUnderCard != slotUnderCard){
+    			// Turn off the old slot's glow if it exists
+    			if (oldSlotUnderCard != null){
+        		oldSlotUnderCard.SetBorderGlow(oldSlotUnderCard.normalColor, 0);
+    			}
+    			// Turn on the new slot's glow if it exists
+    			if (slotUnderCard != null){
+        			slotUnderCard.SetBorderGlow(slotUnderCard.hoverColor, slotUnderCard.glowIntensity);
+    			} 
+    			oldSlotUnderCard = slotUnderCard;
+			}
+			
         }
     }
     
@@ -103,16 +149,9 @@ public class Card : MonoBehaviour
                 targetPosition, 
                 dragLiftSpeed * Time.deltaTime
             );
-			if (isReturning){
-				if (Vector3.Distance(transform.position, targetPosition) < 0.01f){
-					transform.position = targetPosition;
-					isReturning = false;
-                    isDraggable = true;
-                }
-			}
         }
-
-        if (cardName != oldName || defenseValue != oldDef || attackValue != oldAtk)
+		
+        if (cardName != oldName || defenseValue != oldDef || attackValue != oldAtk || cardImage != oldImage)
         {
             UpdateCardVisuals();
         }
@@ -126,11 +165,18 @@ public class Card : MonoBehaviour
         
             // Try to find a slot under the card
             CardSlot targetSlot = FindSlotUnderCard();
+            Transform parent = transform.parent;
+            CardHandLayout hand = parent.GetComponent<CardHandLayout>();
         
-            if (targetSlot != null && targetSlot.IsEmpty)
+            if (targetSlot != null && targetSlot.CanPlay(this))
             {
+                if (hand)
+                {
+                    hand.cards.Remove(transform.gameObject);
+                }
                 targetSlot.PlaceCard(this);
                 currentSlot = targetSlot;
+                // isDraggable = false;
             }
             else if (currentSlot != null)
             {
@@ -139,8 +185,10 @@ public class Card : MonoBehaviour
             }
             else
             {
-                // No valid slot, could return to hand or starting position
-                ReturnToHand();
+                if (hand)
+                {
+                    hand.ArrangeCards();
+                }
             }
         }
     }
@@ -179,14 +227,6 @@ public class Card : MonoBehaviour
         return transform.position;
     }
     
-    public void ReturnToHand()
-    {
-		isReturning = true;
-        isDraggable = false;
-		targetPosition = initialPosition;
-        Debug.Log("Card returned to hand");
-    }
-
     public void SetSlot(CardSlot slot)
     {
         currentSlot = slot;
@@ -200,9 +240,28 @@ public class Card : MonoBehaviour
         return;
     }
 
-    cardName = data.CardName;
-    attackValue = data.Damage;
-    defenseValue = data.Health;
+        cardName = data.CardName;
+        attackValue = data.Damage;
+        defenseValue = data.Health;
+        cost = data.Cost;
+        acidic = data.Acidic;
+        catch_this = data.Catch;
+        corrosive = data.Corrosive;
+        finesse = data.Finesse;
+        flying = data.Flying;
+        gluttenous = data.Gluttenous;
+        hardened = data.Hardened;
+        harvest = data.Harvest;
+        juiced = data.Juiced;
+        juicy = data.Juicy;
+        opportunist = data.Opportunist;
+        pummel = data.Pummel;
+        reach = data.Reach;
+        rotten = data.Rotten;
+        shielded = data.Shielded;
+        tribal = data.Tribal;
+        vampire = data.Vampire;
+
     // cardImage = ???
     // How to deal with card properties like Acidic?
 

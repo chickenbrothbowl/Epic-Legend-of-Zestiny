@@ -117,7 +117,7 @@ public static class CardParser
       Debug.Log("Card Log:");
       foreach (var card_data in cards)
       {
-         Debug.Log($"{card_data.CardName} {card_data.CardID} {card_data.Cost} {card_data.Damage} {card_data.Health} {card_data.Acidic}");
+         //Debug.Log($"{card_data.CardName} {card_data.CardID} {card_data.Cost} {card_data.Damage} {card_data.Health} {card_data.Acidic}");
       }
 
       return cards;

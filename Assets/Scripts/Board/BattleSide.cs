@@ -11,7 +11,7 @@ public class BattleSide : MonoBehaviour
         slots = GetComponentsInChildren<CardSlot>();
     }
     
-    public void AttackOpposingSide(BattleSide opponent, BattleSide you)
+    public void AttackOpposingSide(BattleSide opponent)
     {
         Debug.Log("Attacking Opposing Side");
         for (int i = 0; i < slots.Length; i++)
@@ -24,11 +24,11 @@ public class BattleSide : MonoBehaviour
                 if (i < opponent.slots.Length && !opponent.slots[i].IsEmpty)
                 {
                     Card defender = opponent.slots[i].currentCard;
-                    CombatResolver.CardVsCard(attacker, defender, opponent.player, you.player); // How to define YOU?
+                    CombatResolver.CardVsCard(attacker, defender, opponent.player, this.player);
                 }
                 else
                 {
-                    CombatResolver.CardVsPlayer(attacker, opponent.player);
+                    CombatResolver.CardVsPlayer(attacker, opponent.player, this.player);
                 }
             }
         }
@@ -69,9 +69,14 @@ public static class CombatResolver
         else { defender.defenseValue -= attacker.attackValue; }
     }
 
-    public static void CardVsPlayer(Card attacker, Player target)
+    public static void CardVsPlayer(Card attacker, Player target, Player you)
     {
         Debug.Log("Card Vs Player");
         target.life -= attacker.attackValue;
+        
+        if (attacker.vampire)
+        {
+        you.life += attacker.attackValue;
+        }
     }
 }

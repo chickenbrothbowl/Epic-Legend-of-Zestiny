@@ -2,20 +2,22 @@ using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
-    public static AudioManager Instance;   // Singleton reference
+    public static AudioManager Instance;   // Singleton 
 
     [Header("Audio Clips")]
     public AudioClip cardPlacementClip;
+    public AudioClip BellTap;
+    public AudioClip JuiceRefil;
 
     private AudioSource audioSource;
 
     void Awake()
     {
-        // Ensure there’s only one AudioManager
+        
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject); // Optional: persist between scenes
+            DontDestroyOnLoad(gameObject); 
         }
         else
         {
@@ -23,26 +25,32 @@ public class AudioManager : MonoBehaviour
             return;
         }
 
-        // Add an AudioSource automatically
+        
         audioSource = gameObject.AddComponent<AudioSource>();
         audioSource.playOnAwake = false;
         audioSource.loop = false;
     }
 
-    public void PlayCardPlacement()
-    {
+    public void PlayCardPlacement() {
         if (cardPlacementClip != null)
         {
             audioSource.PlayOneShot(cardPlacementClip);
         }
     }
 
-    // Optional helper for other sound effects
-    public void PlaySound(AudioClip clip)
-    {
-        if (clip != null)
+    public void BellTapsound() {
+        if (BellTap != null)
         {
-            audioSource.PlayOneShot(clip);
+            audioSource.PlayOneShot(BellTap);
         }
     }
+
+    public void JuiceRefilSound() {
+        if (JuiceRefil != null)
+        {
+            audioSource.PlayOneShot(JuiceRefil);
+        }
+    }
+
+    
 }

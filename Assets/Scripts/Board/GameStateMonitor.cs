@@ -14,6 +14,7 @@ public class GameStateMonitor : MonoBehaviour
     {
         if (isPlayerTurn)
         {
+            AudioManager.Instance.BellTapsound();
 			board.DoAttacks();
             EndTurn();
             DoEnemyTurn();
@@ -29,6 +30,8 @@ public class GameStateMonitor : MonoBehaviour
 			maxJuiceAmnt = 10;
 		}
 		juice.SetJuice(maxJuiceAmnt);
+
+        AudioManager.Instance.JuiceRefilSound();
     }
 
     void EndTurn()

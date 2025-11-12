@@ -40,6 +40,11 @@ public class JuiceLevel : MonoBehaviour
         UpdateTargets();
     }
 
+	public int GetJuice()
+	{
+    return juiceAmnt;
+	}
+
     void Update()
     {
         // Smoothly lerp towards target fullness
@@ -57,6 +62,8 @@ public class JuiceLevel : MonoBehaviour
             iceCubes.localPosition = icePos;
         }
     }
+
+
     
     private void UpdateTargets()
     {

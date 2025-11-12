@@ -27,7 +27,7 @@ public class CardSlot : MonoBehaviour
     
     void Start()
     {
-        juice = transform.parent.parent.GetComponent<GameBoard>().monitor.juice;
+        juice = transform.parent.parent.GetComponent<GameBoard>().manager.juice;
         CreateBorderFrame();
         SetBorderGlow(normalColor, 0);
     }

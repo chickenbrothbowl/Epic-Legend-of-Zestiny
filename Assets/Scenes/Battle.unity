@@ -539,6 +539,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CardManager
   card: {fileID: 7124592944193891571, guid: 5cad9f05812fb4598ab8b67bc1e4c41e, type: 3}
   cardParent: {fileID: 1281726977}
+--- !u!4 &440524684 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -4388654572198467207, guid: 4ecc4780f4eea4147aba58083a55f819, type: 3}
+  m_PrefabInstance: {fileID: 1763896159}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &448153718
 GameObject:
   m_ObjectHideFlags: 0
@@ -1402,6 +1407,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 4ecc4780f4eea4147aba58083a55f819, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1763896163}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 4ecc4780f4eea4147aba58083a55f819, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1763896165}
   m_SourcePrefab: {fileID: 100100000, guid: 4ecc4780f4eea4147aba58083a55f819, type: 3}
 --- !u!1 &1763896160 stripped
 GameObject:
@@ -1421,15 +1429,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameStateMonitor
   maxJuiceAmnt: 1
+  handSize: 3
   player: {fileID: 1085155750}
   enemy: {fileID: 1202280496}
   juice: {fileID: 8274470406823356863}
   enemyDeck: {fileID: 1857985311}
   playerDeck: {fileID: 1281726976}
   playerHand: {fileID: 1554178402}
-  isPlayerTurn: 1
   board: {fileID: 2014053478}
-  handSize: 3
+  isPlayerTurn: 1
 --- !u!136 &1763896163
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1453,6 +1461,22 @@ CapsuleCollider:
   m_Height: 1
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1763896165
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1763896160}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca7fb8dce76b4e47a4bf40e8515bdaf0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Bell
+  gameStateManager: {fileID: 1763896161}
+  bellTop: {fileID: 440524684}
+  shakeSpeed: 8
+  shakeAmount: 10
 --- !u!4 &1784540574 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4130865657531461969, guid: 0025adc5b19374c85bfea75177ba7d8b, type: 3}
@@ -1845,7 +1869,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GameBoard
   playerSide: {fileID: 2076866823}
   enemySide: {fileID: 1219700271}
-  monitor: {fileID: 1763896161}
+  manager: {fileID: 1763896161}
 --- !u!1 &2076866821
 GameObject:
   m_ObjectHideFlags: 0
@@ -2758,6 +2782,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   iceCubes: {fileID: 1727344088}
   juiceAmnt: 0
+  lerpSpeed: 5
+  maxScale: 176
+  minIceY: -6
+  maxIceY: 0
 --- !u!1001 &8297109869889171877
 PrefabInstance:
   m_ObjectHideFlags: 0

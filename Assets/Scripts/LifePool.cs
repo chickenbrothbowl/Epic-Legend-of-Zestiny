@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class LifePool : MonoBehaviour
 {
     public GameObject seed;
-    public GameStateMonitor monitor;
+    public GameStateManager manager;
     public int animationSpeed = 5;
     public int scoreMax = 5;
     public int counter = 0;

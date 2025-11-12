@@ -403,7 +403,7 @@ MonoBehaviour:
   normalAngleX: 40
   tiltedAngleX: 85
   screenBottomThreshold: 150
-  screenBottomThresholdUp: 300
+  screenBottomThresholdUp: 275
   smoothSpeed: 5
 --- !u!1001 &299068227
 PrefabInstance:

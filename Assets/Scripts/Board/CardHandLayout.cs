@@ -11,6 +11,8 @@ public class CardHandLayout : MonoBehaviour
     public bool centerCards = true; // Center the hand around the parent position
     // New: fixed angle for the whole hand (in degrees, X axis for 2D)
 	[SerializeField] float handAngleDeg = 90f;
+	[SerializeField] float currentHandAngleDeg = 90f;
+
 
     private int previousChildCount = 0;
 
@@ -50,7 +52,7 @@ public class CardHandLayout : MonoBehaviour
     	float startOffset = centerCards ? -totalWidth / 2f : 0f;
 
     	// New: compute the target rotation once
-    	Quaternion targetRot = Quaternion.Euler(handAngleDeg, 0f, 0f);
+    	Quaternion targetRot = Quaternion.Euler(currentHandAngleDeg, 0f, 0f);
 
     	for (int i = 0; i < cards.Count; i++)
     	{
@@ -60,7 +62,7 @@ public class CardHandLayout : MonoBehaviour
 
         	StartCoroutine(AnimateTo(card: cards[i], targetPosition: targetPos, targetRotation: targetRot));
     	}
-}
+	}
 
 	IEnumerator AnimateTo(GameObject card, Vector3 targetPosition, Quaternion targetRotation)
 	{

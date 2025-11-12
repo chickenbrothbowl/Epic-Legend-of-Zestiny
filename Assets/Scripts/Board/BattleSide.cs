@@ -5,12 +5,12 @@ public class BattleSide : MonoBehaviour
 {
     public CardSlot[] slots;
     public Player player; // The player/entity this side represents
-    
+   
     void Start()
     {
         slots = GetComponentsInChildren<CardSlot>();
     }
-    
+   
     public void AttackOpposingSide(BattleSide opponent)
     {
         Debug.Log("Attacking Opposing Side");
@@ -19,7 +19,7 @@ public class BattleSide : MonoBehaviour
             if (!slots[i].IsEmpty)
             {
                 Card attacker = slots[i].currentCard;
-                
+               
                 // Check if there's a card to block
                 if (i < opponent.slots.Length && !opponent.slots[i].IsEmpty)
                 {
@@ -34,7 +34,6 @@ public class BattleSide : MonoBehaviour
         }
     }
 }
-
 
 // Separates combat logic into its own class
 public static class CombatResolver
@@ -62,10 +61,49 @@ public static class CombatResolver
         {
             target.life -= attacker.attackValue;
         }
+        else if (defender.finesse)
+        {
+            if (defender.attackValue >= attacker.defenseValue)
+            {
+                attacker.defenseValue = 0;
+            }
+            else
+            {
+                defender.defenseValue -= attacker.attackValue;
+            }
+
+            if (attacker.acidic)
+            {
+                defender.defenseValue -= 1;
+            }
+
+            if (attacker.corrosive)
+            {
+                defender.attackValue -= 1;
+            }
+        }
         else if (attacker.pummel && (attacker.attackValue > defender.defenseValue))
         {
             target.life -= attacker.attackValue - defender.defenseValue;
             defender.defenseValue -= attacker.attackValue;
+
+            if (defender.acidic)
+            {
+                attacker.defenseValue -= 1;
+            }
+
+            if (defender.corrosive)
+            {
+                attacker.attackValue -= 1;
+            }
+        }
+        else if (defender.acidic && !attacker.hardened)
+        {
+            attacker.defenseValue -= 1;
+        }
+        else if (defender.corrosive && !attacker.hardened)
+        {
+            attacker.attackValue -= 1;
         }
         else { defender.defenseValue -= attacker.attackValue; }
     }
@@ -74,7 +112,7 @@ public static class CombatResolver
     {
         Debug.Log("Card Vs Player");
         target.life -= attacker.attackValue;
-        
+       
         if (attacker.vampire)
         {
         you.life += attacker.attackValue;

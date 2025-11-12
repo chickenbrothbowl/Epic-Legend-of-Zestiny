@@ -7,7 +7,7 @@ public class DeckLayout : MonoBehaviour
     public List<GameObject> cards;
     public float yIncrement = 0.2f;
     public float animationSpeed = 5f; // Speed of the animation
-	public bool canDraw = false;
+	public bool canDraw = true;
     private int previousChildCount = 0;
     public GameObject hand;
 

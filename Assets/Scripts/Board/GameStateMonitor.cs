@@ -35,7 +35,7 @@ public class GameStateMonitor : MonoBehaviour
 		juice.SetJuice(maxJuiceAmnt);
 
         AudioManager.Instance.JuiceRefilSound();
-		playerDeck.DrawCard();
+		playerDeck.canDraw = true;
     }
 
     void EndTurn()
@@ -52,14 +52,10 @@ public class GameStateMonitor : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isPlayerTurn && playerHand.cards.Count < handSize)
-        {
-            playerDeck.canDraw = true;
-        }
-        else
+        if (playerHand.cards.Count >= handSize)
         {
             playerDeck.canDraw = false;
         }
-        
+       
     }
 }

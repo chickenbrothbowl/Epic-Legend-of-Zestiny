@@ -111,7 +111,7 @@ public static class CombatResolver
     public static void CardVsPlayer(Card attacker, Player target, Player you)
     {
         Debug.Log("Card Vs Player");
-        target.life -= attacker.attackValue;
+        target.DealDamage(attacker.attackValue);
        
         if (attacker.vampire)
         {

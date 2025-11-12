@@ -11,7 +11,7 @@ public class BattleSide : MonoBehaviour
         slots = GetComponentsInChildren<CardSlot>();
     }
     
-    public void AttackOpposingSide(BattleSide opponent)
+    public void AttackOpposingSide(BattleSide opponent, BattleSide you)
     {
         Debug.Log("Attacking Opposing Side");
         for (int i = 0; i < slots.Length; i++)
@@ -24,7 +24,7 @@ public class BattleSide : MonoBehaviour
                 if (i < opponent.slots.Length && !opponent.slots[i].IsEmpty)
                 {
                     Card defender = opponent.slots[i].currentCard;
-                    CombatResolver.CardVsCard(attacker, defender, opponent.player);
+                    CombatResolver.CardVsCard(attacker, defender, opponent.player, you.player); // How to define YOU?
                 }
                 else
                 {
@@ -38,15 +38,33 @@ public class BattleSide : MonoBehaviour
 
 // Separates combat logic into its own class
 public static class CombatResolver
-// Combat keywords: acidic, corrosive, finesse, flying, pummel, reach, shielded, vampire
+// Combat keywords: acidic, corrosive, finesse, flying, hardened, pummel, reach, vampire
 {
-    public static void CardVsCard(Card attacker, Card defender, Player target)
+    public static void CardVsCard(Card attacker, Card defender, Player target, Player you)
     {
         Debug.Log("Card Vs Card");
 
-        if (attacker.flying && (!defender.flying || !defender.reach))
+        if (attacker.vampire)
+        {
+            if (!defender.flying && !defender.reach)
+            {
+                target.life -= attacker.attackValue;
+                you.life += attacker.attackValue;
+            }
+            else
+            {
+                defender.defenseValue -= attacker.attackValue;
+                you.life += attacker.attackValue;
+            }
+        }
+        else if (attacker.flying && !defender.flying && !defender.reach)
         {
             target.life -= attacker.attackValue;
+        }
+        else if (attacker.pummel && (attacker.attackValue > defender.defenseValue))
+        {
+            target.life -= attacker.attackValue - defender.defenseValue;
+            defender.defenseValue -= attacker.attackValue;
         }
         else { defender.defenseValue -= attacker.attackValue; }
     }

@@ -11,7 +11,7 @@ public class Card : MonoBehaviour
 	public int cost;
     
     [Header("Visual Components")]
-    public Renderer cardImageRenderer;
+    public SpriteRenderer spriteRenderer;
     public TextMeshPro nameText;
     public TextMeshPro attackText;
     public TextMeshPro defenseText;
@@ -50,9 +50,9 @@ public class Card : MonoBehaviour
     void UpdateCardVisuals()
     {
         // Update card face texture
-        if (cardImageRenderer != null && cardImage != null)
+        if (spriteRenderer != null && cardImage != null)
         {
-            cardImageRenderer.material.mainTexture = cardImage.texture;
+            spriteRenderer.sprite = cardImage;
         }
         
         // Update text displays
@@ -226,9 +226,7 @@ public class Card : MonoBehaviour
     attackValue = data.Damage;
     defenseValue = data.Health;
 	cost = data.Cost;
-    // cardImage = ???
-    // How to deal with card properties like Acidic?
-
+	cardImage = Resources.Load<Sprite>($"CardIcons/{data.CardID}");
     UpdateCardVisuals();
     }
 }

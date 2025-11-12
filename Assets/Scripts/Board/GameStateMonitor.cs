@@ -7,8 +7,11 @@ public class GameStateMonitor : MonoBehaviour
     public Player enemy;
 	public JuiceLevel juice;
     public EnemyDeck enemyDeck;
+	public DeckLayout playerDeck;
+    public CardHandLayout playerHand;
     public bool isPlayerTurn = true;
     public GameBoard board;
+	public int handSize = 3;
 
     void OnMouseDown()
     {
@@ -32,6 +35,7 @@ public class GameStateMonitor : MonoBehaviour
 		juice.SetJuice(maxJuiceAmnt);
 
         AudioManager.Instance.JuiceRefilSound();
+		playerDeck.DrawCard();
     }
 
     void EndTurn()
@@ -48,6 +52,14 @@ public class GameStateMonitor : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (isPlayerTurn && playerHand.cards.Count < handSize)
+        {
+            playerDeck.canDraw = true;
+        }
+        else
+        {
+            playerDeck.canDraw = false;
+        }
         
     }
 }

@@ -403,7 +403,7 @@ MonoBehaviour:
   normalAngleX: 40
   tiltedAngleX: 85
   screenBottomThreshold: 150
-  screenBottomThresholdUp: 300
+  screenBottomThresholdUp: 275
   smoothSpeed: 5
 --- !u!1001 &299068227
 PrefabInstance:
@@ -1243,8 +1243,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AudioManager
   cardPlacementClip: {fileID: 8300000, guid: 154fc75a2af61bc4881e02e6244ad82f, type: 3}
-  BellTap: {fileID: 8300000, guid: ff6218e8844e04004818aead3a486480, type: 3}
-  JuiceRefil: {fileID: 8300000, guid: cd4e68482941940ea9fd1b6754e206f7, type: 3}
 --- !u!4 &1715588806
 Transform:
   m_ObjectHideFlags: 0

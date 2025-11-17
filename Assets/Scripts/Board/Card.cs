@@ -51,6 +51,8 @@ public class Card : MonoBehaviour
     public bool vampire;
     public CardSlot slotUnderCard;
     public CardSlot oldSlotUnderCard;
+    private int baseAttack;
+    private int baseDefense;
 
 
     void Start()
@@ -76,9 +78,46 @@ public class Card : MonoBehaviour
             Destroy(gameObject);
         }
         oldName = cardName;
-        oldAtk = attackValue;
-        oldDef = defenseValue;
         oldImage = cardImage;
+    }
+
+    public void RefreshVisuals() //public wrapper to call from BattleSide
+    {
+        UpdateCardVisuals();
+    }
+
+    public void SetBaseAttack(int atk)
+    {
+        baseAttack = atk;
+        attackValue = baseAttack;
+    }
+
+    public void SetBaseDefense(int def)
+    {
+        baseDefense = def;
+        defenseValue = baseDefense;
+    }
+
+    public void ApplyAttackBonus(int bonus)
+    {
+        attackValue = baseAttack + bonus;
+        UpdateCardVisuals();
+    }
+
+    public void ApplyDefenseBonus(int bonus)
+    {
+        defenseValue = baseDefense + bonus;
+        UpdateCardVisuals();
+    }
+
+    public int GetBaseAttack()
+    {
+        return baseAttack;
+    }
+
+    public int GetBaseDefense()
+    {
+        return baseDefense;
     }
 
     void OnMouseDown()
@@ -256,6 +295,8 @@ public class Card : MonoBehaviour
         shielded = data.Shielded;
         tribal = data.Tribal;
         vampire = data.Vampire;
+        SetBaseAttack(data.Damage);
+        SetBaseDefense(data.Health);
         UpdateCardVisuals();
     }
 }

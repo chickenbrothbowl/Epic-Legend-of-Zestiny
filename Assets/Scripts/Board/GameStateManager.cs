@@ -27,6 +27,8 @@ public class GameStateManager : MonoBehaviour
     {
         handSize = 3 + HarvestCount();
         playerDeck.canDraw = playerHand.cards.Count < handSize;
+        board.playerSide.ApplyTribalBuffs();
+        board.enemySide.ApplyTribalBuffs();
     }
 
     public void EndPlayerTurn()

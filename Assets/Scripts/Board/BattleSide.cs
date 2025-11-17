@@ -10,6 +10,33 @@ public class BattleSide : MonoBehaviour
     {
         slots = GetComponentsInChildren<CardSlot>();
     }
+
+    public int TribalCount()
+    {
+        int count = 0;
+        foreach (CardSlot slot in slots)
+        {
+            if (!slot.IsEmpty && slot.currentCard.tribal)
+                count++;
+        }
+        return count;
+    }
+
+    public void ApplyTribalBuffs()
+    {
+        int tribalCount = TribalCount();
+        foreach (CardSlot slot in slots)
+        {
+            if (!slot.IsEmpty)
+            {
+                Card c = slot.currentCard;
+                if (c.tribal)
+                {
+                    c.ApplyAttackBonus(tribalCount);
+                }
+            }
+        }
+    }
    
     public void AttackOpposingSide(BattleSide opponent)
     {

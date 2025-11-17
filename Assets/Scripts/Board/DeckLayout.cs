@@ -10,6 +10,7 @@ public class DeckLayout : MonoBehaviour
 	public bool canDraw = true;
     private int previousChildCount = 0;
     public GameObject hand;
+	private CardHandLayout handLayout;
 
     void Start()
     {
@@ -26,6 +27,9 @@ public class DeckLayout : MonoBehaviour
             ArrangeCards();
             previousChildCount = transform.childCount;
         }
+		if (canDraw){
+			// Shake top card
+		}
     }
 
 	void OnMouseDown(){
@@ -54,8 +58,7 @@ public class DeckLayout : MonoBehaviour
         cards.Remove(card);
         previousChildCount--;
         card.transform.SetParent(hand.transform);
-		
-
+		StopAllCoroutines();
         // Reset card's animation state
         Card cardComponent = card.GetComponent<Card>();
         if (cardComponent != null)

@@ -11,7 +11,7 @@ public class EnemyDeck : MonoBehaviour
     private int previousChildCount = 0;
     public BattleSide Side;
     public CardManager cardManager;
-    public string enemyDeckPath = "Scripts/Data/EnemyDecks"; 
+    public EnemyDeckAsset deckAsset;
 
     void Start()
     {
@@ -106,39 +106,30 @@ public class EnemyDeck : MonoBehaviour
     
      void PopulateDeck()
     {
-        List<CardData> masterList = CardParser.ParseCsv();
-
-        string folderPath = Path.Combine(Application.dataPath, enemyDeckPath.Replace("Assets/", ""));
-
-        string[] csvPaths = Directory.GetFiles(folderPath, "*.csv");
-
-        if (csvPaths.Length == 0)
+        if (deckAsset == null)
         {
-            Debug.LogError($"No decks found at path: {enemyDeckPath}");
+            Debug.LogError("EnemyDeck: No deck asset assigned.");
             return;
         }
 
-        string randomDeck = csvPaths[Random.Range(0, csvPaths.Length)];
-        Debug.Log("EnemyDeck is: " + Path.GetFileName(randomDeck));
+        List<CardData> masterList = CardParser.ParseCsv();
+        cards = new List<GameObject>();
 
-        string[] rawLines = File.ReadAllLines(randomDeck);
-        IEnumerable<string> lines = rawLines
-            .Select(l => l.Trim())
-            .Where(l => !string.IsNullOrEmpty(l));
-
-        foreach (string id in lines)
+        foreach (string id in deckAsset.cardIDs)
         {
-            string cardId = id;
+            CardData data = masterList.Find(cd => cd.CardID == id);
 
-            CardData data = masterList.Find(cd => cd.CardID == cardId);
+            if (data == null)
+            {
+                Debug.LogWarning($"Card ID '{id}' not found in document.");
+                continue;
+            }
 
             GameObject cardObj = Instantiate(cardManager.card, transform);
             Card c = cardObj.GetComponent<Card>();
-            if (c != null)
-            {
-                c.LoadFromData(data);
-                cardObj.name = c.cardName;
-            }
+            c.LoadFromData(data);
+            cardObj.name = c.cardName;
+
             cards.Add(cardObj);
         }
     }

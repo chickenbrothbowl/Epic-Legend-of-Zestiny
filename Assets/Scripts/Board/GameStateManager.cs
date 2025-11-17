@@ -26,7 +26,9 @@ public class GameStateManager : MonoBehaviour
     void Update()
     {
         // Manage hand size limit
-        playerDeck.canDraw = playerHand.cards.Count < handSize;
+        if (playerHand.cards.Count >= handSize){
+			playerDeck.canDraw = false;
+		}
     }
 
     public void EndPlayerTurn()

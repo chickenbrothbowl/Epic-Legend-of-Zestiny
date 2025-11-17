@@ -25,7 +25,7 @@ public class GameStateManager : MonoBehaviour
 
     void Update()
     {
-        // Manage hand size limit
+        handSize = 3 + HarvestCount();
         playerDeck.canDraw = playerHand.cards.Count < handSize;
     }
 
@@ -51,5 +51,18 @@ public class GameStateManager : MonoBehaviour
         AudioManager.Instance.JuiceRefilSound();
         
         playerDeck.canDraw = true;
+    }
+
+    public int HarvestCount()
+    {
+        int count = 0;
+        foreach (CardSlot slot in board.playerSide.slots)
+        {
+            if (!slot.IsEmpty && slot.currentCard.harvest)
+            {
+                count++;
+            }
+        }
+        return count;
     }
 }

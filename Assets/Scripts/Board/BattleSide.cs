@@ -38,7 +38,8 @@ public class BattleSide : MonoBehaviour
 // Separates combat logic into its own class
 public static class CombatResolver
 // Combat keywords: acidic, corrosive, finesse, flying, hardened, pummel, reach, vampire
-// ETB keywords:
+// Static keywords: harvest, juicy, rotten, tribal
+// Triggered keywords: catch, gluttenous, juiced, opportunist
 {
     public static void CardVsCard(Card attacker, Card defender, Player target, Player you)
     {
@@ -84,9 +85,6 @@ public static class CombatResolver
         }
         else if (attacker.pummel && (attacker.attackValue > defender.defenseValue))
         {
-            target.life -= attacker.attackValue - defender.defenseValue;
-            defender.defenseValue -= attacker.attackValue;
-
             if (defender.acidic)
             {
                 attacker.defenseValue -= 1;
@@ -95,15 +93,19 @@ public static class CombatResolver
             if (defender.corrosive)
             {
                 attacker.attackValue -= 1;
-            }
+            }  
+            target.life -= attacker.attackValue - defender.defenseValue;
+            defender.defenseValue -= attacker.attackValue;
         }
         else if (defender.acidic && !attacker.hardened)
         {
             attacker.defenseValue -= 1;
+            defender.defenseValue -= attacker.attackValue;
         }
         else if (defender.corrosive && !attacker.hardened)
         {
             attacker.attackValue -= 1;
+            defender.defenseValue -= attacker.attackValue;
         }
         else { defender.defenseValue -= attacker.attackValue; }
     }

@@ -6,6 +6,7 @@ public class BattleSide : MonoBehaviour
     public CardSlot[] slots;
     public Player player; // The player/entity this side represents
    
+   
     void Start()
     {
         slots = GetComponentsInChildren<CardSlot>();
@@ -46,6 +47,7 @@ public class BattleSide : MonoBehaviour
             if (!slots[i].IsEmpty)
             {
                 Card attacker = slots[i].currentCard;
+               
                
                 // Check if there's a card to block
                 if (i < opponent.slots.Length && !opponent.slots[i].IsEmpty)
@@ -110,6 +112,27 @@ public static class CombatResolver
                 defender.attackValue -= 1;
             }
         }
+        else if (defender.finesse)
+        {
+            if (defender.attackValue >= attacker.defenseValue)
+            {
+                attacker.defenseValue = 0;
+            }
+            else
+            {
+                defender.defenseValue -= attacker.attackValue;
+            }
+
+            if (attacker.acidic)
+            {
+                defender.defenseValue -= 1;
+            }
+
+            if (attacker.corrosive)
+            {
+                defender.attackValue -= 1;
+            }
+        }
         else if (attacker.pummel && (attacker.attackValue > defender.defenseValue))
         {
             if (defender.acidic)
@@ -148,3 +171,4 @@ public static class CombatResolver
         }
     }
 }
+

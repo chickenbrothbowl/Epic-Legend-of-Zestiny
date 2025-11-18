@@ -12,4 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54a334b5401c93d40b0cf9a760043c57, type: 3}
   m_Name: goblins
   m_EditorClassIdentifier: Assembly-CSharp::EnemyDeckAsset
-  cardIDs: []
+  cardIDs:
+  - goblemon
+  - goblemon
+  - goblemon
+  - goblemon
+  - goblemon
+  - goblemon
+  - goblemon
+  - goblemon
+  - goblemon

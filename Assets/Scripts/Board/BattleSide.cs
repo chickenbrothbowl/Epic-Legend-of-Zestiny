@@ -62,6 +62,60 @@ public class BattleSide : MonoBehaviour
             }
         }
     }
+
+    void OnEnable()
+    {
+        Card.OnCardDied += HandleAllyDeath;
+        Card.OnCardDied += HandleAllyDeathGluttonous;
+    }
+
+    void OnDisable()
+    {
+        Card.OnCardDied -= HandleAllyDeath;
+        Card.OnCardDied -= HandleAllyDeathGluttonous;
+
+    }
+
+    private void HandleAllyDeath(Card deadCard, BattleSide side)
+    {
+        if (side != this) return;
+
+        foreach (CardSlot slot in slots)
+        {
+            if (!slot.IsEmpty)
+            {
+                Card c = slot.currentCard;
+                if (c.opportunist)
+                {
+                    c.SetBaseAttack(c.GetBaseAttack() + 1);
+                    c.SetBaseDefense(c.GetBaseDefense() + 1);
+                    c.ApplyAttackBonus(0);
+                    c.ApplyDefenseBonus(0);
+                }
+            }
+        }
+    }
+
+    private void HandleAllyDeathGluttonous(Card deadCard, BattleSide side)
+    {
+        if (side != this) return;
+        if (!deadCard.tribal) return;
+
+        foreach (CardSlot slot in slots)
+        {
+            if (!slot.IsEmpty)
+            {
+                Card c = slot.currentCard;
+                if (c.gluttenous)
+                {
+                    c.SetBaseDefense(c.GetBaseDefense() + 2);
+                    c.ApplyDefenseBonus(0);
+                }
+            }
+        }
+    }
+
+
 }
 
 // Separates combat logic into its own class
@@ -73,6 +127,12 @@ public static class CombatResolver
     public static void CardVsCard(Card attacker, Card defender, Player target, Player you)
     {
         Debug.Log("Card Vs Card");
+
+        if (defender.rotten && !attacker.hardened && !attacker.flying)
+        {
+            attacker.poisoned = true;
+            Debug.Log("Attacker has been poisoned!");
+        }
 
         if (attacker.vampire)
         {

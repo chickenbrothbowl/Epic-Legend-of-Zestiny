@@ -49,10 +49,12 @@ public class Card : MonoBehaviour
     public bool shielded;
     public bool tribal;
     public bool vampire;
+    public bool poisoned;
     public CardSlot slotUnderCard;
     public CardSlot oldSlotUnderCard;
     private int baseAttack;
     private int baseDefense;
+    public static event System.Action<Card, BattleSide> OnCardDied;
 
 
     void Start()
@@ -73,11 +75,17 @@ public class Card : MonoBehaviour
         if (nameText != null) nameText.text = cardName;
         if (attackText != null) attackText.text = attackValue.ToString();
         if (defenseText != null) defenseText.text = defenseValue.ToString();
+
         // If defense is 0, destroy the card
         if (defenseValue <= 0) {
+            BattleSide side = GetComponentInParent<BattleSide>();
+            OnCardDied?.Invoke(this, side);
             Destroy(gameObject);
         }
+
         oldName = cardName;
+        oldAtk = attackValue;
+        oldDef = defenseValue;
         oldImage = cardImage;
     }
 

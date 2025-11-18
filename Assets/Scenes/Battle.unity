@@ -1500,7 +1500,7 @@ MonoBehaviour:
   animationSpeed: 5
   Side: {fileID: 1219700271}
   cardManager: {fileID: 427852562}
-  enemyDeckPath: Scripts/Data/EnemyDecks/
+  deckAsset: {fileID: 11400000, guid: c348514c0f1860a4c855a42881f6ef7a, type: 2}
 --- !u!4 &1880090203 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4130865657531461969, guid: 0025adc5b19374c85bfea75177ba7d8b, type: 3}

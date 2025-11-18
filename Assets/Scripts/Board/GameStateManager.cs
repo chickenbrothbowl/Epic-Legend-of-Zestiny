@@ -29,6 +29,8 @@ public class GameStateManager : MonoBehaviour
         playerDeck.canDraw = playerHand.cards.Count < handSize;
         board.playerSide.ApplyTribalBuffs();
         board.enemySide.ApplyTribalBuffs();
+        TickPoison(board.playerSide);
+        TickPoison(board.enemySide);
     }
 
     public void EndPlayerTurn()
@@ -67,4 +69,27 @@ public class GameStateManager : MonoBehaviour
         }
         return count;
     }
+
+    void TickPoison(BattleSide side)
+    {
+        foreach (CardSlot slot in side.slots)
+        {
+            if (!slot.IsEmpty)
+            {
+                Card c = slot.currentCard;
+
+                if (c.poisoned)
+                {
+                    c.defenseValue -= 1;
+                    c.RefreshVisuals();
+
+                    if (c.defenseValue <= 0)
+                    {
+                        c.poisoned = false; // death trigger happens elsewhere
+                    }
+                }
+            }
+        }
+    }
+
 }

@@ -6,6 +6,7 @@ public class BattleSide : MonoBehaviour
     public CardSlot[] slots;
     public Player player; // The player/entity this side represents
    
+   
     void Start()
     {
         slots = GetComponentsInChildren<CardSlot>();
@@ -47,6 +48,7 @@ public class BattleSide : MonoBehaviour
             {
                 Card attacker = slots[i].currentCard;
                
+               
                 // Check if there's a card to block
                 if (i < opponent.slots.Length && !opponent.slots[i].IsEmpty)
                 {
@@ -60,6 +62,60 @@ public class BattleSide : MonoBehaviour
             }
         }
     }
+
+    void OnEnable()
+    {
+        Card.OnCardDied += HandleAllyDeath;
+        Card.OnCardDied += HandleAllyDeathGluttonous;
+    }
+
+    void OnDisable()
+    {
+        Card.OnCardDied -= HandleAllyDeath;
+        Card.OnCardDied -= HandleAllyDeathGluttonous;
+
+    }
+
+    private void HandleAllyDeath(Card deadCard, BattleSide side)
+    {
+        if (side != this) return;
+
+        foreach (CardSlot slot in slots)
+        {
+            if (!slot.IsEmpty)
+            {
+                Card c = slot.currentCard;
+                if (c.opportunist)
+                {
+                    c.SetBaseAttack(c.GetBaseAttack() + 1);
+                    c.SetBaseDefense(c.GetBaseDefense() + 1);
+                    c.ApplyAttackBonus(0);
+                    c.ApplyDefenseBonus(0);
+                }
+            }
+        }
+    }
+
+    private void HandleAllyDeathGluttonous(Card deadCard, BattleSide side)
+    {
+        if (side != this) return;
+        if (!deadCard.tribal) return;
+
+        foreach (CardSlot slot in slots)
+        {
+            if (!slot.IsEmpty)
+            {
+                Card c = slot.currentCard;
+                if (c.gluttenous)
+                {
+                    c.SetBaseDefense(c.GetBaseDefense() + 2);
+                    c.ApplyDefenseBonus(0);
+                }
+            }
+        }
+    }
+
+
 }
 
 // Separates combat logic into its own class
@@ -71,6 +127,12 @@ public static class CombatResolver
     public static void CardVsCard(Card attacker, Card defender, Player target, Player you)
     {
         Debug.Log("Card Vs Card");
+
+        if (defender.rotten && !attacker.hardened && !attacker.flying)
+        {
+            attacker.poisoned = true;
+            Debug.Log("Attacker has been poisoned!");
+        }
 
         if (attacker.vampire)
         {
@@ -88,6 +150,27 @@ public static class CombatResolver
         else if (attacker.flying && !defender.flying && !defender.reach)
         {
             target.life -= attacker.attackValue;
+        }
+        else if (defender.finesse)
+        {
+            if (defender.attackValue >= attacker.defenseValue)
+            {
+                attacker.defenseValue = 0;
+            }
+            else
+            {
+                defender.defenseValue -= attacker.attackValue;
+            }
+
+            if (attacker.acidic)
+            {
+                defender.defenseValue -= 1;
+            }
+
+            if (attacker.corrosive)
+            {
+                defender.attackValue -= 1;
+            }
         }
         else if (defender.finesse)
         {
@@ -148,3 +231,4 @@ public static class CombatResolver
         }
     }
 }
+

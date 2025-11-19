@@ -5,6 +5,7 @@ public class BattleSide : MonoBehaviour
 {
     public CardSlot[] slots;
     public Player player; // The player/entity this side represents
+    public bool isPlayerSide = false;
    
    
     void Start()

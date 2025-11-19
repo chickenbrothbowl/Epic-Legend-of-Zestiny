@@ -771,7 +771,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   life: 5
-  isPlayer: 0
+  isPlayer: 1
   lifePool: {fileID: 1451423095}
 --- !u!1 &1202280494
 GameObject:
@@ -870,6 +870,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BattleSide
   slots: []
   player: {fileID: 1202280496}
+  isPlayerSide: 0
 --- !u!1001 &1255759189
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1867,6 +1868,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BattleSide
   slots: []
   player: {fileID: 1085155750}
+  isPlayerSide: 0
 --- !u!1001 &2141625396
 PrefabInstance:
   m_ObjectHideFlags: 0

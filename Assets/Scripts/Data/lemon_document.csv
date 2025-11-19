@@ -1,6 +1,7 @@
 card_name,card_id,cost,damage,health,acidic,catch,corrosive,finesse,flying,gluttonous,hardened,harvest,juiced,juicy,opportunist,pummel,reach,rotten,shielded,tribal,vampire
 Prince,prince,NA,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0
 Lord Limoncello,limoncello,NA,2,10,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0
+Incredible Pulp,incredible_pulp,1,6,8,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0
 Mobhobgoblemon,mobhobgoblemon,5,1,6,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0
 Buddha's Hand,buddhas_hand,4,4,2,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0
 Farmer,farmer,4,1,2,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0
@@ -23,6 +24,5 @@ Wedge Warrior,wedge_warrior,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 Lemon Wedge,lemon_wedge,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 Sapsucker,sapsucker,1,1,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0
 Sourpuss,sourpuss,1,1,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
-Incredible Pulp,incredible_pulp,1,6,8,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0
 Pulp Peasant,pulp_peasant,1,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0
 Lemon Drop,lemon_drop,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0

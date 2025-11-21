@@ -5,12 +5,12 @@ public class GameBoard : MonoBehaviour
 {
     public BattleSide playerSide;
     public BattleSide enemySide;
-    public GameStateMonitor monitor;
+    public GameStateManager manager;
 
     [ContextMenu("Process Attacks")]
     public void DoAttacks()
     {
-        if (monitor.isPlayerTurn)
+        if (manager.isPlayerTurn)
         {
             playerSide.AttackOpposingSide(enemySide);
             enemySide.AttackOpposingSide(playerSide);

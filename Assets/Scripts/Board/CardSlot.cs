@@ -27,7 +27,7 @@ public class CardSlot : MonoBehaviour
     
     void Start()
     {
-        juice = transform.parent.parent.GetComponent<GameBoard>().monitor.juice;
+        juice = transform.parent.parent.GetComponent<GameBoard>().manager.juice;
         CreateBorderFrame();
         SetBorderGlow(normalColor, 0);
     }
@@ -100,7 +100,7 @@ public class CardSlot : MonoBehaviour
     public void PlaceCard(Card card)
     {
         if (!IsEmpty) return;
-        juice.juiceAmnt -= card.cost;
+        juice.SetJuice(juice.juiceAmnt -= card.cost);
         currentCard = card;
         card.transform.SetParent(transform);
         card.transform.localPosition = Vector3.zero;

@@ -54,6 +54,7 @@ namespace Map
             PlayerPrefs.Save();
         }
 
+        
         private void OnApplicationQuit()
         {
             SaveMap();

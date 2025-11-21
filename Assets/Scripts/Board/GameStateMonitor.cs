@@ -33,9 +33,14 @@ public class GameStateMonitor : MonoBehaviour
 			maxJuiceAmnt = 10;
 		}
 		juice.SetJuice(maxJuiceAmnt);
-
-        AudioManager.Instance.JuiceRefilSound();
+        Invoke("PlayJuiceSound", 1 );
 		playerDeck.DrawCard();
+    }
+
+    void PlayJuiceSound()
+    {
+        AudioManager.Instance.JuiceRefilSound();
+
     }
 
     void EndTurn()

@@ -88,8 +88,8 @@ public class BattleSide : MonoBehaviour
                 Card c = slot.currentCard;
                 if (c.opportunist)
                 {
+                    if (deadCard.opportunist) return;
                     c.SetBaseAttack(c.GetBaseAttack() + 1);
-                    c.SetBaseDefense(c.GetBaseDefense() + 1);
                     c.ApplyAttackBonus(0);
                     c.ApplyDefenseBonus(0);
                 }

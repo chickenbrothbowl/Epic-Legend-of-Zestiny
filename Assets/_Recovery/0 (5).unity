@@ -770,7 +770,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a11c36da7da44395ba3a99dd695d428e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  battleSide: {fileID: 2076866823}
   life: 5
   isPlayer: 1
   lifePool: {fileID: 1451423095}
@@ -818,7 +817,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a11c36da7da44395ba3a99dd695d428e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player
-  battleSide: {fileID: 1219700271}
   life: 5
   isPlayer: 0
   lifePool: {fileID: 1451423095}
@@ -973,8 +971,6 @@ MonoBehaviour:
   animationSpeed: 5
   canDraw: 1
   hand: {fileID: 1554178400}
-  cardManager: {fileID: 427852562}
-  deckAsset: {fileID: 11400000, guid: 9d0303f76f19a0b4e931e34764251ec0, type: 2}
 --- !u!4 &1281726977
 Transform:
   m_ObjectHideFlags: 0
@@ -1505,7 +1501,7 @@ MonoBehaviour:
   animationSpeed: 5
   Side: {fileID: 1219700271}
   cardManager: {fileID: 427852562}
-  deckAsset: {fileID: 11400000, guid: ff65f39b78a6a404a934c87abd69c8d0, type: 2}
+  deckAsset: {fileID: 11400000, guid: c348514c0f1860a4c855a42881f6ef7a, type: 2}
 --- !u!4 &1880090203 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4130865657531461969, guid: 0025adc5b19374c85bfea75177ba7d8b, type: 3}

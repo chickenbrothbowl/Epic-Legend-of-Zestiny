@@ -12,4 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54a334b5401c93d40b0cf9a760043c57, type: 3}
   m_Name: Wild Animals
   m_EditorClassIdentifier: Assembly-CSharp::EnemyDeckAsset
-  cardIDs: []
+  cardIDs:
+  - wolf_lemon
+  - bat

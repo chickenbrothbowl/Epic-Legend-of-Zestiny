@@ -2,18 +2,18 @@ card_name,card_id,cost,damage,health,acidic,catch,corrosive,finesse,flying,glutt
 Prince,prince,NA,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0
 Lord Limoncello,limoncello,NA,2,10,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0
 Incredible Pulp,incredible_pulp,1,6,8,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0
-Mobhobgoblemon,mobhobgoblemon,5,1,6,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0
+Mobhobgoblemon,mobhobgoblemon,5,0,6,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0
 Buddha's Hand,buddhas_hand,4,4,2,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0
-Farmer,farmer,4,1,2,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0
 Golemon,golemon,4,1,5,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0
 Lemon Knight,lemon_knight,4,2,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 Wolf Lemon,wolf_lemon,4,3,3,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0
 Bat,bat,3,1,2,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1
 Cockatoo,cockatoo,3,2,3,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0
 Hobgoblemon,hobgoblemon,3,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0
+Farmer,farmer,3,1,2,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0
 Juggler,juggler,3,1,2,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 Pucker,pucker,3,3,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-Rindeater,rindeater,3,1,2,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0
+Rindeater,rindeater,3,1,3,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0
 Lemon Jelly,lemon_jelly,2,0,4,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 Beggar,beggar,2,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 Goblemon,goblemon,2,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0

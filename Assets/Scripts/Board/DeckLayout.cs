@@ -11,6 +11,8 @@ public class DeckLayout : MonoBehaviour
     private int previousChildCount = 0;
     public GameObject hand;
 	private CardHandLayout handLayout;
+    public CardManager cardManager;
+    public PlayerDeckAsset deckAsset;
 
     void Start()
     {
@@ -40,13 +42,31 @@ public class DeckLayout : MonoBehaviour
 
     void UpdateCardsArray()
     {
-        cards = new List<GameObject>();
-        for (int i = 0; i < transform.childCount; i++)
+        if (deckAsset == null)
         {
-			GameObject cardObject = transform.GetChild(i).gameObject;
-            cards.Add(cardObject);
-			Card card = cardObject.GetComponent<Card>();
-			card.isDraggable = false;
+            Debug.LogError("EnemyDeck: No deck asset assigned.");
+            return;
+        }
+
+        List<CardData> masterList = CardParser.ParseCsv();
+        cards = new List<GameObject>();
+
+        foreach (string id in deckAsset.cardIDs)
+        {
+            CardData data = masterList.Find(cd => cd.CardID == id);
+
+            if (data == null)
+            {
+                Debug.LogWarning($"Card ID '{id}' not found in document.");
+                continue;
+            }
+
+            GameObject cardObj = Instantiate(cardManager.card, transform);
+            Card c = cardObj.GetComponent<Card>();
+            c.LoadFromData(data);
+            cardObj.name = c.cardName;
+
+            cards.Add(cardObj);
         }
     }
 

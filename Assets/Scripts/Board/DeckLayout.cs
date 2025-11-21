@@ -28,6 +28,8 @@ public class DeckLayout : MonoBehaviour
             previousChildCount = transform.childCount;
         }
 		if (canDraw){
+            GameObject card = cards[cards.Count - 1];
+            
 			// Shake top card
 		}
     }

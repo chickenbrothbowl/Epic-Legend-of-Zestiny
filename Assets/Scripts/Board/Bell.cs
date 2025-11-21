@@ -44,6 +44,11 @@ public class Bell : MonoBehaviour
         }
     }
 
+    void OnMouseOver()
+    {
+        
+    }
+
     void StartShaking()
     {
         if (bellTop != null)

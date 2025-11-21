@@ -47,6 +47,7 @@ public class LifePool : MonoBehaviour
     private void SendCounterToPosition()
     {
         Vector3 targetPos = new Vector3(offset + (increment * counter), 0, 0);
+		StopAllCoroutines();
         StartCoroutine(SeedToPosition(targetPos));
     }
     

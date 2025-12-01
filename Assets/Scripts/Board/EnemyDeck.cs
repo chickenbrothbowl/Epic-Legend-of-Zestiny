@@ -32,7 +32,8 @@ public class EnemyDeck : MonoBehaviour
     }
 
 	void OnMouseDown(){
-		DeckPlay();
+        return;
+		//DeckPlay();
 	}
 
     void UpdateCardsArray()

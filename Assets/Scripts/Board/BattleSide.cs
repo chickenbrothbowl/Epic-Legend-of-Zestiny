@@ -156,27 +156,9 @@ public static class CombatResolver
         {
             if (defender.attackValue >= attacker.defenseValue)
             {
-                attacker.defenseValue = 0;
-            }
-            else
-            {
-                defender.defenseValue -= attacker.attackValue;
-            }
-
-            if (attacker.acidic)
-            {
-                defender.defenseValue -= 1;
-            }
-
-            if (attacker.corrosive)
-            {
-                defender.attackValue -= 1;
-            }
-        }
-        else if (defender.finesse)
-        {
-            if (defender.attackValue >= attacker.defenseValue)
-            {
+                Debug.Log("Finesse activated");
+                Debug.Log("Defender Attack: " + defender.attackValue);
+                Debug.Log("Attacker Defense: " + attacker.defenseValue);
                 attacker.defenseValue = 0;
             }
             else

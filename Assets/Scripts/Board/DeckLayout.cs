@@ -14,8 +14,10 @@ public class DeckLayout : MonoBehaviour
     public CardManager cardManager;
     public PlayerDeckAsset deckAsset;
 
+
     void Start()
     {
+        Populate();
         UpdateCardsArray();
         ArrangeCards();
     }
@@ -42,7 +44,7 @@ public class DeckLayout : MonoBehaviour
 		}
 	}
 
-    void UpdateCardsArray()
+    void Populate()
     {
         if (deckAsset == null)
         {
@@ -69,6 +71,18 @@ public class DeckLayout : MonoBehaviour
             cardObj.name = c.cardName;
 
             cards.Add(cardObj);
+        }
+    }
+
+    void UpdateCardsArray()
+    {
+        cards = new List<GameObject>();
+        for (int i = 0; i < transform.childCount; i++)
+        {
+			GameObject cardObject = transform.GetChild(i).gameObject;
+            cards.Add(cardObject);
+			Card card = cardObject.GetComponent<Card>();
+			card.isDraggable = false;
         }
     }
 

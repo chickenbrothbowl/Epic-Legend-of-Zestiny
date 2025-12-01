@@ -154,8 +154,9 @@ public static class CombatResolver
         }
         else if (defender.finesse)
         {
-            if (defender.attackValue >= attacker.defenseValue)
+            if (defender.attackValue > attacker.defenseValue) // No >= as temp fix
             {
+                // KNOWN ISSUE: Finesse sometimes sets defense=2 defender defense to 1 if = is present? Will look into it
                 Debug.Log("Finesse activated");
                 Debug.Log("Defender Attack: " + defender.attackValue);
                 Debug.Log("Attacker Defense: " + attacker.defenseValue);

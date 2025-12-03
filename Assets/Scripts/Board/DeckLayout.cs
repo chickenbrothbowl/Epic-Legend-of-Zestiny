@@ -33,7 +33,6 @@ public class DeckLayout : MonoBehaviour
         }
 		if (canDraw){
             GameObject card = cards[cards.Count - 1];
-            
 			// Shake top card
 		}
     }

@@ -1,8 +1,13 @@
 using UnityEngine;
+using TMPro;
+
+
 public class JuiceLevel : MonoBehaviour
 {
     [Header("References")]
     public Transform iceCubes;
+	public TextMeshPro text;
+	public GameStateManager gsm;
     
     [Header("Settings")]
     public int juiceAmnt;
@@ -38,11 +43,12 @@ public class JuiceLevel : MonoBehaviour
         juiceAmnt = Mathf.Clamp(amount, 0, 10);
         targetFullness = juiceAmnt / 10f;
         UpdateTargets();
+		text.text = $"{juiceAmnt}/{gsm.maxJuiceAmnt}";
     }
 
 	public int GetJuice()
 	{
-    return juiceAmnt;
+    	return juiceAmnt;
 	}
 
     void Update()
@@ -62,8 +68,6 @@ public class JuiceLevel : MonoBehaviour
             iceCubes.localPosition = icePos;
         }
     }
-
-
     
     private void UpdateTargets()
     {

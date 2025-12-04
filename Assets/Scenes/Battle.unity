@@ -986,7 +986,9 @@ MonoBehaviour:
   canDraw: 1
   hand: {fileID: 1554178400}
   cardManager: {fileID: 427852562}
-  deckAsset: {fileID: 11400000, guid: 9d0303f76f19a0b4e931e34764251ec0, type: 2}
+  deckAsset: {fileID: 11400000, guid: 0c5dced8698fc41e1bf648e247c1f672, type: 2}
+  shakeSpeed: 40
+  shakeAmount: 1
 --- !u!4 &1281726977
 Transform:
   m_ObjectHideFlags: 0
@@ -1952,8 +1954,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: x/x
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 37482d0d7110d4a9f8fefcd9ff8fb4d4, type: 2}
+  m_sharedMaterial: {fileID: -1630905034319856636, guid: 37482d0d7110d4a9f8fefcd9ff8fb4d4, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2049,7 +2051,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  - {fileID: -1630905034319856636, guid: 37482d0d7110d4a9f8fefcd9ff8fb4d4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3403,6 +3405,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   iceCubes: {fileID: 1727344088}
   text: {fileID: 2135082166}
+  gsm: {fileID: 1763896161}
   juiceAmnt: 0
   lerpSpeed: 5
   maxScale: 176

@@ -13,6 +13,12 @@ public class DeckLayout : MonoBehaviour
 	private CardHandLayout handLayout;
     public CardManager cardManager;
     public PlayerDeckAsset deckAsset;
+	private bool isShaking;
+
+    [Header("Shake Settings")]
+    public float shakeSpeed = 8f;
+    public float shakeAmount = 10f; // Degrees of rotation
+    private Quaternion originalRotation;
 
 
     void Start()
@@ -31,15 +37,23 @@ public class DeckLayout : MonoBehaviour
             ArrangeCards();
             previousChildCount = transform.childCount;
         }
+		GameObject topCard = cards[cards.Count - 1];
+
 		if (canDraw){
-            GameObject card = cards[cards.Count - 1];
-			// Shake top card
+			if (!isShaking){
+				originalRotation = topCard.transform.localRotation;
+				StartShaking(topCard);
+				isShaking = true;
+			}
+		} else {
+			StopShaking(topCard);
 		}
     }
 
 	void OnMouseDown(){
 		if (canDraw){
 			DrawCard();
+			isShaking = false;
 		}
 	}
 
@@ -118,10 +132,33 @@ public class DeckLayout : MonoBehaviour
         }
     }
 
+	void StartShaking(GameObject card)
+    	{
+            isShaking = true;
+            StartCoroutine(ShakeRoutine(card));
+        }
+
+    void StopShaking(GameObject card)
+    {
+        isShaking = false;
+        StopAllCoroutines();
+        card.transform.localRotation = originalRotation;
+    }
+
+    IEnumerator ShakeRoutine(GameObject card)
+    {
+        while (isShaking)
+        {
+            float shake = Mathf.Sin(Time.time * shakeSpeed) * shakeAmount;
+            card.transform.localRotation = originalRotation * Quaternion.Euler(shake, shake, shake);
+            yield return null;
+        }
+    }
+
     IEnumerator AnimateToPosition(GameObject card, Vector3 targetPosition)
     {
         if (card == null) yield break;
-
+		
         while (Vector3.Distance(card.transform.position, targetPosition) > 0.01f)
         {
             // Clamp lerp factor to prevent instant snapping on frame time spikes

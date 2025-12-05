@@ -10,13 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 39ca3d99a140d7943880f5fcd45719c9, type: 3}
-  m_Name: PlayerDeck
+  m_Name: TestDeck
   m_EditorClassIdentifier: Assembly-CSharp::PlayerDeckAsset
   cardIDs:
-  - rindeater
-  - lemon_drop
-  - lemon_drop
-  - lemon_drop
-  - lemon_drop
-  - lemon_drop
-  - lemon_drop
+  - farmer
+  - farmer
+  - juggler
+  - juggler
+  - farmer

@@ -5,6 +5,7 @@ public class AudioManager : MonoBehaviour
     public static AudioManager Instance;   // Singleton 
 
     [Header("Audio Clips")]
+    public AudioClip Background;
     public AudioClip cardPlacementClip;
     public AudioClip BellTap;
     public AudioClip JuiceRefil;

@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 // Represents one side of the battlefield (player or enemy)
@@ -11,6 +12,11 @@ public class BattleSide : MonoBehaviour
     void Start()
     {
         slots = GetComponentsInChildren<CardSlot>();
+
+        if (player != null)
+        {
+            player.battleSide = this;
+        }
     }
 
     public int TribalCount()
@@ -42,7 +48,7 @@ public class BattleSide : MonoBehaviour
    
     public void AttackOpposingSide(BattleSide opponent)
     {
-        Debug.Log("Attacking Opposing Side");
+        Debug.Log("Attacking " + opponent + " Side");
         for (int i = 0; i < slots.Length; i++)
         {
             if (!slots[i].IsEmpty)
@@ -58,7 +64,16 @@ public class BattleSide : MonoBehaviour
                 }
                 else
                 {
-                    CombatResolver.CardVsPlayer(attacker, opponent.player, this.player);
+                    if (isPlayerSide == true)
+                    {
+                        Debug.Log("Attacking Enemy");
+                        CombatResolver.CardVsPlayer(attacker, opponent.player, this.player);
+                    }
+                    else
+                    {
+                        Debug.Log("Attacking Player");
+                        CombatResolver.CardVsPlayer(attacker, opponent.player, this.player);
+                    }
                 }
             }
         }
@@ -139,18 +154,18 @@ public static class CombatResolver
         {
             if (!defender.flying && !defender.reach)
             {
-                target.life -= attacker.attackValue;
-                you.life += attacker.attackValue;
+                target.DealDamage(attacker.attackValue, target);
+                you.DealDamage(-attacker.attackValue, target);
             }
             else
             {
                 defender.defenseValue -= attacker.attackValue;
-                you.life += attacker.attackValue;
+                you.DealDamage(-attacker.attackValue, target);
             }
         }
         else if (attacker.flying && !defender.flying && !defender.reach)
         {
-            target.life -= attacker.attackValue;
+            target.DealDamage(attacker.attackValue, target);
         }
         else if (defender.finesse)
         {
@@ -188,7 +203,7 @@ public static class CombatResolver
             {
                 attacker.attackValue -= 1;
             }  
-            target.life -= attacker.attackValue - defender.defenseValue;
+            target.DealDamage(attacker.attackValue - defender.defenseValue, target);
             defender.defenseValue -= attacker.attackValue;
         }
         else if (defender.acidic && !attacker.hardened)
@@ -207,11 +222,13 @@ public static class CombatResolver
     public static void CardVsPlayer(Card attacker, Player target, Player you)
     {
         Debug.Log("Card Vs Player");
-        target.DealDamage(attacker.attackValue);
+        Debug.Log("Dealing " + attacker.attackValue + " damage to " + target.name);
+
+        target.DealDamage(attacker.attackValue, target);
        
         if (attacker.vampire)
         {
-        you.life += attacker.attackValue;
+        you.DealDamage(-attacker.attackValue, target);
         }
     }
 }

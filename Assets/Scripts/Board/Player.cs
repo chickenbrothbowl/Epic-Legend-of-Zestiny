@@ -6,17 +6,20 @@ public class Player : MonoBehaviour
     public bool isPlayer = false;
     public LifePool lifePool;
 
-    public void DealDamage(int damage)
+    public void DealDamage(int damage, Player target)
     {
-	    if (battleSide.isPlayerSide)
-    	{
-        	lifePool.MoveCounter(-damage);
-    	}
-    	else
-    	{
-        	lifePool.MoveCounter(+damage);
-    	}
-}
+		if (isPlayer == true)
+        {
+            lifePool.MoveCounter(-damage);
+			Debug.Log("To " + this.name);
+        }
+
+		if (isPlayer == false)
+        {
+            lifePool.MoveCounter(+damage);
+			Debug.Log("To " + this.name);
+        }
+	}
     
     
 	void Update(){

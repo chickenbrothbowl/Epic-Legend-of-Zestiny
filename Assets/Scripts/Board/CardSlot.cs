@@ -33,7 +33,7 @@ public class CardSlot : MonoBehaviour
     }
 
 	public bool CanPlay(Card card){
-		return IsEmpty && card.cost <= juice.juiceAmnt;
+		return IsEmpty && card.Data.Cost <= juice.juiceAmnt;
 	}
     
     void CreateBorderFrame()
@@ -100,7 +100,7 @@ public class CardSlot : MonoBehaviour
     public void PlaceCard(Card card)
     {
         if (!IsEmpty) return;
-        juice.SetJuice(juice.juiceAmnt -= card.cost);
+        juice.SetJuice(juice.juiceAmnt -= card.Data.Cost);
         currentCard = card;
         card.transform.SetParent(transform);
         card.transform.localPosition = Vector3.zero;

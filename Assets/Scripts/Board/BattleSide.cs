@@ -1,14 +1,11 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
-// Represents one side of the battlefield (player or enemy)
 public class BattleSide : MonoBehaviour
 {
     public CardSlot[] slots;
-    public Player player; // The player/entity this side represents
+    public Player player;
     public bool isPlayerSide = false;
-   
-   
+
     void Start()
     {
         slots = GetComponentsInChildren<CardSlot>();
@@ -24,7 +21,7 @@ public class BattleSide : MonoBehaviour
         int count = 0;
         foreach (CardSlot slot in slots)
         {
-            if (!slot.IsEmpty && slot.currentCard.tribal)
+            if (!slot.IsEmpty && slot.currentCard.HasAbility(Ability.Tribal))
                 count++;
         }
         return count;
@@ -38,14 +35,14 @@ public class BattleSide : MonoBehaviour
             if (!slot.IsEmpty)
             {
                 Card c = slot.currentCard;
-                if (c.tribal)
+                if (c.HasAbility(Ability.Tribal))
                 {
                     c.ApplyAttackBonus(tribalCount);
                 }
             }
         }
     }
-   
+
     public void AttackOpposingSide(BattleSide opponent)
     {
         Debug.Log("Attacking " + opponent + " Side");
@@ -54,9 +51,7 @@ public class BattleSide : MonoBehaviour
             if (!slots[i].IsEmpty)
             {
                 Card attacker = slots[i].currentCard;
-               
-               
-                // Check if there's a card to block
+
                 if (i < opponent.slots.Length && !opponent.slots[i].IsEmpty)
                 {
                     Card defender = opponent.slots[i].currentCard;
@@ -89,7 +84,6 @@ public class BattleSide : MonoBehaviour
     {
         Card.OnCardDied -= HandleAllyDeath;
         Card.OnCardDied -= HandleAllyDeathGluttonous;
-
     }
 
     private void HandleAllyDeath(Card deadCard, BattleSide side)
@@ -101,9 +95,9 @@ public class BattleSide : MonoBehaviour
             if (!slot.IsEmpty)
             {
                 Card c = slot.currentCard;
-                if (c.opportunist)
+                if (c.HasAbility(Ability.Opportunist))
                 {
-                    if (deadCard.opportunist) return;
+                    if (deadCard.HasAbility(Ability.Opportunist)) return;
                     c.SetBaseAttack(c.GetBaseAttack() + 1);
                     c.ApplyAttackBonus(0);
                     c.ApplyDefenseBonus(0);
@@ -115,14 +109,14 @@ public class BattleSide : MonoBehaviour
     private void HandleAllyDeathGluttonous(Card deadCard, BattleSide side)
     {
         if (side != this) return;
-        if (!deadCard.tribal) return;
+        if (!deadCard.HasAbility(Ability.Tribal)) return;
 
         foreach (CardSlot slot in slots)
         {
             if (!slot.IsEmpty)
             {
                 Card c = slot.currentCard;
-                if (c.gluttenous)
+                if (c.HasAbility(Ability.Gluttenous))
                 {
                     c.SetBaseDefense(c.GetBaseDefense() + 2);
                     c.ApplyDefenseBonus(0);
@@ -130,29 +124,29 @@ public class BattleSide : MonoBehaviour
             }
         }
     }
-
-
 }
 
-// Separates combat logic into its own class
 public static class CombatResolver
-// Combat keywords: acidic, corrosive, finesse, flying, hardened, pummel, reach, vampire
-// Static keywords: harvest, juicy, rotten, tribal
-// Triggered keywords: catch, gluttenous, juiced, opportunist
 {
+    // Combat keywords: acidic, corrosive, finesse, flying, hardened, pummel, reach, vampire
+    // Static keywords: harvest, juicy, rotten, tribal
+    // Triggered keywords: catch, gluttenous, juiced, opportunist
+
     public static void CardVsCard(Card attacker, Card defender, Player target, Player you)
     {
         Debug.Log("Card Vs Card");
 
-        if (defender.rotten && !attacker.hardened && !attacker.flying)
+        if (defender.HasAbility(Ability.Rotten) && 
+            !attacker.HasAbility(Ability.Hardened) && 
+            !attacker.HasAbility(Ability.Flying))
         {
             attacker.poisoned = true;
             Debug.Log("Attacker has been poisoned!");
         }
 
-        if (attacker.vampire)
+        if (attacker.HasAbility(Ability.Vampire))
         {
-            if (!defender.flying && !defender.reach)
+            if (!defender.HasAbility(Ability.Flying) && !defender.HasAbility(Ability.Reach))
             {
                 target.DealDamage(attacker.attackValue, target);
                 you.DealDamage(-attacker.attackValue, target);
@@ -163,15 +157,16 @@ public static class CombatResolver
                 you.DealDamage(-attacker.attackValue, target);
             }
         }
-        else if (attacker.flying && !defender.flying && !defender.reach)
+        else if (attacker.HasAbility(Ability.Flying) && 
+                 !defender.HasAbility(Ability.Flying) && 
+                 !defender.HasAbility(Ability.Reach))
         {
             target.DealDamage(attacker.attackValue, target);
         }
-        else if (defender.finesse)
+        else if (defender.HasAbility(Ability.Finesse))
         {
-            if (defender.attackValue > attacker.defenseValue) // No >= as temp fix
+            if (defender.attackValue > attacker.defenseValue)
             {
-                // KNOWN ISSUE: Finesse sometimes sets defense=2 defender defense to 1 if = is present? Will look into it
                 Debug.Log("Finesse activated");
                 Debug.Log("Defender Attack: " + defender.attackValue);
                 Debug.Log("Attacker Defense: " + attacker.defenseValue);
@@ -182,41 +177,44 @@ public static class CombatResolver
                 defender.defenseValue -= attacker.attackValue;
             }
 
-            if (attacker.acidic)
+            if (attacker.HasAbility(Ability.Acidic))
             {
                 defender.defenseValue -= 1;
             }
 
-            if (attacker.corrosive)
+            if (attacker.HasAbility(Ability.Corrosive))
             {
                 defender.attackValue -= 1;
             }
         }
-        else if (attacker.pummel && (attacker.attackValue > defender.defenseValue))
+        else if (attacker.HasAbility(Ability.Pummel) && (attacker.attackValue > defender.defenseValue))
         {
-            if (defender.acidic)
+            if (defender.HasAbility(Ability.Acidic))
             {
                 attacker.defenseValue -= 1;
             }
 
-            if (defender.corrosive)
+            if (defender.HasAbility(Ability.Corrosive))
             {
                 attacker.attackValue -= 1;
-            }  
+            }
             target.DealDamage(attacker.attackValue - defender.defenseValue, target);
             defender.defenseValue -= attacker.attackValue;
         }
-        else if (defender.acidic && !attacker.hardened)
+        else if (defender.HasAbility(Ability.Acidic) && !attacker.HasAbility(Ability.Hardened))
         {
             attacker.defenseValue -= 1;
             defender.defenseValue -= attacker.attackValue;
         }
-        else if (defender.corrosive && !attacker.hardened)
+        else if (defender.HasAbility(Ability.Corrosive) && !attacker.HasAbility(Ability.Hardened))
         {
             attacker.attackValue -= 1;
             defender.defenseValue -= attacker.attackValue;
         }
-        else { defender.defenseValue -= attacker.attackValue; }
+        else
+        {
+            defender.defenseValue -= attacker.attackValue;
+        }
     }
 
     public static void CardVsPlayer(Card attacker, Player target, Player you)
@@ -225,11 +223,10 @@ public static class CombatResolver
         Debug.Log("Dealing " + attacker.attackValue + " damage to " + target.name);
 
         target.DealDamage(attacker.attackValue, target);
-       
-        if (attacker.vampire)
+
+        if (attacker.HasAbility(Ability.Vampire))
         {
-        you.DealDamage(-attacker.attackValue, target);
+            you.DealDamage(-attacker.attackValue, target);
         }
     }
 }
-

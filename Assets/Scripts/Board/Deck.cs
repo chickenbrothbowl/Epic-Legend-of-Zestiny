@@ -52,7 +52,7 @@ public class Deck : MonoBehaviour
             GameObject cardObj = Instantiate(card, transform);
             Card c = cardObj.GetComponent<Card>();
             c.LoadFromData(data);
-            cardObj.name = c.cardName;
+            cardObj.name = c.Data.CardName;
 
             cards.Add(cardObj);
         }

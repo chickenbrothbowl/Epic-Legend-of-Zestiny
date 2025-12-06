@@ -62,7 +62,7 @@ public class GameStateManager : MonoBehaviour
         int count = 0;
         foreach (CardSlot slot in board.playerSide.slots)
         {
-            if (!slot.IsEmpty && slot.currentCard.harvest)
+            if (!slot.IsEmpty && slot.currentCard.HasAbility(Ability.Harvest))
             {
                 count++;
             }

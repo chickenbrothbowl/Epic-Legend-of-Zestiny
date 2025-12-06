@@ -972,10 +972,10 @@ MonoBehaviour:
   animationSpeed: 5
   canDraw: 1
   hand: {fileID: 1554178400}
-  cardManager: {fileID: 427852562}
-  deckAsset: {fileID: 11400000, guid: 0c5dced8698fc41e1bf648e247c1f672, type: 2}
+  deckAsset: {fileID: 11400000, guid: e4d9ae9df39574aea934dd516a21914c, type: 2}
   shakeSpeed: 40
   shakeAmount: 1
+  card: {fileID: 7124592944193891571, guid: 5cad9f05812fb4598ab8b67bc1e4c41e, type: 3}
 --- !u!4 &1281726977
 Transform:
   m_ObjectHideFlags: 0
@@ -1313,6 +1313,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9dad01737e548f8a8cc4e325fa1a91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AudioManager
+  Background: {fileID: 0}
   cardPlacementClip: {fileID: 8300000, guid: 154fc75a2af61bc4881e02e6244ad82f, type: 3}
   BellTap: {fileID: 8300000, guid: ff6218e8844e04004818aead3a486480, type: 3}
   JuiceRefil: {fileID: 8300000, guid: 346e35e31363d4713b8405ee73d6941f, type: 3}
@@ -1540,8 +1541,8 @@ MonoBehaviour:
   yIncrement: 0.03
   animationSpeed: 5
   Side: {fileID: 1219700271}
-  cardManager: {fileID: 427852562}
-  deckAsset: {fileID: 11400000, guid: c348514c0f1860a4c855a42881f6ef7a, type: 2}
+  deckAsset: {fileID: 11400000, guid: 30f54c962fd994b9c8c6becd5780ad2d, type: 2}
+  card: {fileID: 7124592944193891571, guid: 5cad9f05812fb4598ab8b67bc1e4c41e, type: 3}
 --- !u!4 &1880090203 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4130865657531461969, guid: 0025adc5b19374c85bfea75177ba7d8b, type: 3}

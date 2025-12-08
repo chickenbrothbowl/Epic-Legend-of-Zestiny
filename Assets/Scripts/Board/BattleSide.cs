@@ -11,17 +11,14 @@ public class BattleSide : MonoBehaviour
     void Start()
     {
         slots = GetComponentsInChildren<CardSlot>();
-<<<<<<< HEAD
         AudioManager.Instance.PlayBackgroundMusic();
-        AudioManager.Instance.PlayBackgroundMusic();
-=======
 
         if (player != null)
         {
             player.battleSide = this;
         }
->>>>>>> e62b6af73c97b3a3f48cdf57e5e897d2b52577a8
     }
+    
 
     public int TribalCount()
     {

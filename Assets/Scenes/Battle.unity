@@ -1221,11 +1221,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9dad01737e548f8a8cc4e325fa1a91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AudioManager
-<<<<<<< HEAD
   Background: {fileID: 8300000, guid: f9bd0537ff31142218ef2e474846a9c1, type: 3}
-=======
-  Background: {fileID: 0}
->>>>>>> e62b6af73c97b3a3f48cdf57e5e897d2b52577a8
   cardPlacementClip: {fileID: 8300000, guid: 154fc75a2af61bc4881e02e6244ad82f, type: 3}
   BellTap: {fileID: 8300000, guid: ff6218e8844e04004818aead3a486480, type: 3}
   JuiceRefil: {fileID: 8300000, guid: d2a222e80cc5746dcb5262fb48cc0ac2, type: 3}

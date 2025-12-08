@@ -12,7 +12,7 @@ public class LemonSpawner : MonoBehaviour
     
     void SpawnItems()
     {
-        int numberOfItems = card.cost;
+        int numberOfItems = card.Data.Cost;
         // Clear any existing items first
         foreach (Transform child in transform)
         {
@@ -21,7 +21,6 @@ public class LemonSpawner : MonoBehaviour
         
         float totalWidth = (numberOfItems - 1) * spacing;
         float startX = -totalWidth / 2f;
-    
         for (int i = 0; i < numberOfItems; i++)
         {
             GameObject item = Instantiate(itemPrefab, transform);

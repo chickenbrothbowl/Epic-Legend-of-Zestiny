@@ -488,65 +488,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1880421748021706722, guid: 32f2fc816ee334903bde69c46e475e5e, type: 3}
   m_PrefabInstance: {fileID: 8297109869889171877}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &427852559
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 427852560}
-  - component: {fileID: 427852561}
-  - component: {fileID: 427852562}
-  m_Layer: 0
-  m_Name: Card Manager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &427852560
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 427852559}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.22919, y: -2, z: -0.06621981}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &427852561
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 427852559}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4af404f2b378e6a47ad9e81fdcd42a25, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CardLoader
---- !u!114 &427852562
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 427852559}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e3897cf3958ee134ea87b2e6bb11250a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CardManager
-  card: {fileID: 7124592944193891571, guid: 5cad9f05812fb4598ab8b67bc1e4c41e, type: 3}
-  cardParent: {fileID: 1281726977}
 --- !u!1 &448153718
 GameObject:
   m_ObjectHideFlags: 0
@@ -983,10 +924,10 @@ MonoBehaviour:
   cards: []
   yIncrement: 0.03
   animationSpeed: 5
+  deckAsset: {fileID: 11400000, guid: e4d9ae9df39574aea934dd516a21914c, type: 2}
+  card: {fileID: 7124592944193891571, guid: 5cad9f05812fb4598ab8b67bc1e4c41e, type: 3}
   canDraw: 1
   hand: {fileID: 1554178400}
-  cardManager: {fileID: 427852562}
-  deckAsset: {fileID: 11400000, guid: 0c5dced8698fc41e1bf648e247c1f672, type: 2}
   shakeSpeed: 40
   shakeAmount: 1
 --- !u!4 &1281726977
@@ -1295,7 +1236,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9dad01737e548f8a8cc4e325fa1a91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AudioManager
+<<<<<<< HEAD
   Background: {fileID: 8300000, guid: f9bd0537ff31142218ef2e474846a9c1, type: 3}
+=======
+  Background: {fileID: 0}
+>>>>>>> e62b6af73c97b3a3f48cdf57e5e897d2b52577a8
   cardPlacementClip: {fileID: 8300000, guid: 154fc75a2af61bc4881e02e6244ad82f, type: 3}
   BellTap: {fileID: 8300000, guid: ff6218e8844e04004818aead3a486480, type: 3}
   JuiceRefil: {fileID: 8300000, guid: d2a222e80cc5746dcb5262fb48cc0ac2, type: 3}
@@ -1522,9 +1467,9 @@ MonoBehaviour:
   cards: []
   yIncrement: 0.03
   animationSpeed: 5
+  deckAsset: {fileID: 11400000, guid: 30f54c962fd994b9c8c6becd5780ad2d, type: 2}
+  card: {fileID: 7124592944193891571, guid: 5cad9f05812fb4598ab8b67bc1e4c41e, type: 3}
   Side: {fileID: 1219700271}
-  cardManager: {fileID: 427852562}
-  deckAsset: {fileID: 11400000, guid: c348514c0f1860a4c855a42881f6ef7a, type: 2}
 --- !u!4 &1880090203 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4130865657531461969, guid: 0025adc5b19374c85bfea75177ba7d8b, type: 3}
@@ -3735,7 +3680,6 @@ SceneRoots:
   - {fileID: 1554178401}
   - {fileID: 1281726977}
   - {fileID: 1857985310}
-  - {fileID: 427852560}
   - {fileID: 543450651969948852}
   - {fileID: 1085155749}
   - {fileID: 1202280495}

@@ -1,14 +1,21 @@
 using UnityEngine;
 using TMPro;
+using System.Collections.Generic;
 
 public class Card : MonoBehaviour
 {
     [Header("Card Data")]
-    public string cardName;
+    public CardData Data { get; private set; }
     public Sprite cardImage;
+
+    [Header("Runtime Stats")]
+    private int baseAttack;
+    private int baseDefense;
     public int attackValue;
     public int defenseValue;
-    public int cost;
+
+    [Header("Runtime Status Effects")]
+    public bool poisoned; // Runtime status, not a permanent ability
 
     [Header("Visual Components")]
     public SpriteRenderer spriteRenderer;
@@ -20,42 +27,32 @@ public class Card : MonoBehaviour
     public LayerMask slotLayerMask;
     public CardSlot currentSlot;
     private Vector3 dragOffset;
-    public float boardHeight = -1f; // Changed to float and made it the actual Y position
-    public float dragLiftSpeed = 15f; // Speed for lifting animation
+    public float boardHeight = -1f;
+    public float dragLiftSpeed = 15f;
     private bool isDragging = false;
     public bool isReturning = false;
     public bool isDraggable = true;
     private Camera mainCamera;
     private Vector3 targetPosition;
     private Vector3 initialPosition;
+    public CardSlot slotUnderCard;
+    public CardSlot oldSlotUnderCard;
+
+    // Cache for visual change detection
     private string oldName;
     private int oldAtk;
     private int oldDef;
     private Sprite oldImage;
-    public bool acidic;
-    public bool catch_this;
-    public bool corrosive;
-    public bool finesse;
-    public bool flying;
-    public bool gluttenous;
-    public bool hardened;
-    public bool harvest;
-    public bool juiced;
-    public bool juicy;
-    public bool opportunist;
-    public bool pummel;
-    public bool reach;
-    public bool rotten;
-    public bool shielded;
-    public bool tribal;
-    public bool vampire;
-    public bool poisoned;
-    public CardSlot slotUnderCard;
-    public CardSlot oldSlotUnderCard;
-    private int baseAttack;
-    private int baseDefense;
+
     public static event System.Action<Card, BattleSide> OnCardDied;
 
+    // Convenience accessors
+    public string CardName => Data?.CardName ?? string.Empty;
+    public string CardID => Data?.CardID ?? string.Empty;
+    public int Cost => Data?.Cost ?? 0;
+    public Ability Abilities => Data?.Abilities ?? Ability.None;
+    public bool HasAbility(Ability ability) => Data?.HasAbility(ability) ?? false;
+    public IEnumerable<Ability> GetActiveAbilities() => Data.GetActiveAbilities();
 
     void Start()
     {
@@ -65,34 +62,29 @@ public class Card : MonoBehaviour
 
     void UpdateCardVisuals()
     {
-        // Update card face texture
         if (spriteRenderer != null && cardImage != null)
         {
             spriteRenderer.sprite = cardImage;
         }
 
-        // Update text displays
-        if (nameText != null) nameText.text = cardName;
+        if (nameText != null) nameText.text = CardName;
         if (attackText != null) attackText.text = attackValue.ToString();
         if (defenseText != null) defenseText.text = defenseValue.ToString();
 
-        // If defense is 0, destroy the card
-        if (defenseValue <= 0) {
+        if (defenseValue <= 0)
+        {
             BattleSide side = GetComponentInParent<BattleSide>();
             OnCardDied?.Invoke(this, side);
             Destroy(gameObject);
         }
 
-        oldName = cardName;
+        oldName = CardName;
         oldAtk = attackValue;
         oldDef = defenseValue;
         oldImage = cardImage;
     }
 
-    public void RefreshVisuals() //public wrapper to call from BattleSide
-    {
-        UpdateCardVisuals();
-    }
+    public void RefreshVisuals() => UpdateCardVisuals();
 
     public void SetBaseAttack(int atk)
     {
@@ -118,15 +110,8 @@ public class Card : MonoBehaviour
         UpdateCardVisuals();
     }
 
-    public int GetBaseAttack()
-    {
-        return baseAttack;
-    }
-
-    public int GetBaseDefense()
-    {
-        return baseDefense;
-    }
+    public int GetBaseAttack() => baseAttack;
+    public int GetBaseDefense() => baseDefense;
 
     void OnMouseDown()
     {
@@ -136,7 +121,6 @@ public class Card : MonoBehaviour
             targetPosition = transform.position;
             initialPosition = transform.position;
 
-            // Calculate offset using the card's CURRENT height (not boardHeight yet)
             Vector3 mousePos = GetMouseWorldPositionAtHeight(transform.position.y);
             dragOffset = new Vector3(
                 transform.position.x - mousePos.x,
@@ -144,7 +128,6 @@ public class Card : MonoBehaviour
                 transform.position.z - mousePos.z
             );
 
-            // Remove from current slot if in one
             if (currentSlot != null)
             {
                 currentSlot.RemoveCard();
@@ -157,7 +140,6 @@ public class Card : MonoBehaviour
     {
         if (isDraggable)
         {
-            // Get mouse position at the fixed board height
             Vector3 mousePos = GetMouseWorldPositionAtHeight(boardHeight);
             targetPosition = new Vector3(
                 mousePos.x + dragOffset.x,
@@ -165,24 +147,23 @@ public class Card : MonoBehaviour
                 mousePos.z + dragOffset.z
             );
             slotUnderCard = FindSlotUnderCard();
-            if (oldSlotUnderCard != slotUnderCard) {
-                // Turn off the old slot's glow if it exists
-                if (oldSlotUnderCard != null) {
+            if (oldSlotUnderCard != slotUnderCard)
+            {
+                if (oldSlotUnderCard != null)
+                {
                     oldSlotUnderCard.SetBorderGlow(oldSlotUnderCard.normalColor, 0);
                 }
-                // Turn on the new slot's glow if it exists
-                if (slotUnderCard != null) {
+                if (slotUnderCard != null)
+                {
                     slotUnderCard.SetBorderGlow(slotUnderCard.hoverColor, slotUnderCard.glowIntensity);
                 }
                 oldSlotUnderCard = slotUnderCard;
             }
-
         }
     }
 
     void Update()
     {
-        // Smoothly animate to target position during drag
         if (isDragging || isReturning)
         {
             transform.position = Vector3.Lerp(
@@ -192,7 +173,7 @@ public class Card : MonoBehaviour
             );
         }
 
-        if (cardName != oldName || defenseValue != oldDef || attackValue != oldAtk || cardImage != oldImage)
+        if (CardName != oldName || defenseValue != oldDef || attackValue != oldAtk || cardImage != oldImage)
         {
             UpdateCardVisuals();
         }
@@ -204,7 +185,6 @@ public class Card : MonoBehaviour
         {
             isDragging = false;
 
-            // Try to find a slot under the card
             CardSlot targetSlot = FindSlotUnderCard();
             Transform parent = transform.parent;
             CardHandLayout hand = parent.GetComponent<CardHandLayout>();
@@ -217,11 +197,9 @@ public class Card : MonoBehaviour
                 }
                 targetSlot.PlaceCard(this);
                 currentSlot = targetSlot;
-                // isDraggable = false;
             }
             else if (currentSlot != null)
             {
-                // Return to previous slot
                 currentSlot.PlaceCard(this);
             }
             else
@@ -240,10 +218,9 @@ public class Card : MonoBehaviour
         if (cardCollider != null) cardCollider.enabled = false;
 
         Ray ray = new Ray(transform.position + Vector3.up * 10f, Vector3.down);
-        RaycastHit hit;
         CardSlot result = null;
 
-        if (Physics.Raycast(ray, out hit, 20f, slotLayerMask))
+        if (Physics.Raycast(ray, out RaycastHit hit, 20f, slotLayerMask))
         {
             result = hit.collider.GetComponent<CardSlot>();
         }
@@ -252,15 +229,12 @@ public class Card : MonoBehaviour
         return result;
     }
 
-    // New method: Get mouse position at a FIXED height
     Vector3 GetMouseWorldPositionAtHeight(float height)
     {
         Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
-        // Use a fixed plane at the specified height
         Plane plane = new Plane(Vector3.up, new Vector3(0, height, 0));
-        float distance;
 
-        if (plane.Raycast(ray, out distance))
+        if (plane.Raycast(ray, out float distance))
         {
             return ray.GetPoint(distance);
         }
@@ -268,10 +242,7 @@ public class Card : MonoBehaviour
         return transform.position;
     }
 
-    public void SetSlot(CardSlot slot)
-    {
-        currentSlot = slot;
-    }
+    public void SetSlot(CardSlot slot) => currentSlot = slot;
 
     public void LoadFromData(CardData data)
     {
@@ -281,28 +252,9 @@ public class Card : MonoBehaviour
             return;
         }
 
-        cardName = data.CardName;
-        attackValue = data.Damage;
-        defenseValue = data.Health;
-        cost = data.Cost;
+        Data = data;
         cardImage = Resources.Load<Sprite>($"CardIcons/{data.CardID}");
-        acidic = data.Acidic;
-        catch_this = data.Catch;
-        corrosive = data.Corrosive;
-        finesse = data.Finesse;
-        flying = data.Flying;
-        gluttenous = data.Gluttenous;
-        hardened = data.Hardened;
-        harvest = data.Harvest;
-        juiced = data.Juiced;
-        juicy = data.Juicy;
-        opportunist = data.Opportunist;
-        pummel = data.Pummel;
-        reach = data.Reach;
-        rotten = data.Rotten;
-        shielded = data.Shielded;
-        tribal = data.Tribal;
-        vampire = data.Vampire;
+
         SetBaseAttack(data.Damage);
         SetBaseDefense(data.Health);
         UpdateCardVisuals();

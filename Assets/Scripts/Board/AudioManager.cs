@@ -10,48 +10,60 @@ public class AudioManager : MonoBehaviour
     public AudioClip BellTap;
     public AudioClip JuiceRefil;
 
-    private AudioSource audioSource;
+    private AudioSource sfxSource;
+    private AudioSource musicSource;
 
-    void Awake()
-    {
+    void Awake(){
         
-        if (Instance == null)
-        {
+        if (Instance == null){
             Instance = this;
             DontDestroyOnLoad(gameObject); 
         }
-        else
-        {
+        else{
             Destroy(gameObject);
             return;
         }
 
         
-        audioSource = gameObject.AddComponent<AudioSource>();
-        audioSource.playOnAwake = false;
-        audioSource.loop = false;
+        sfxSource = gameObject.AddComponent<AudioSource>();
+        sfxSource.playOnAwake = false;
+        sfxSource.loop = false;
+
+        musicSource = gameObject.AddComponent<AudioSource>();
+        musicSource.playOnAwake = false;
+        musicSource.loop = true;
     }
 
     public void PlayCardPlacement() {
         if (cardPlacementClip != null)
         {
-            audioSource.PlayOneShot(cardPlacementClip);
+            sfxSource.PlayOneShot(cardPlacementClip);
         }
     }
 
     public void BellTapsound() {
         if (BellTap != null)
         {
-            audioSource.PlayOneShot(BellTap);
+            sfxSource.PlayOneShot(BellTap);
         }
     }
 
     public void JuiceRefilSound() {
         if (JuiceRefil != null)
         {
-            audioSource.PlayOneShot(JuiceRefil);
+            sfxSource.PlayOneShot(JuiceRefil);
         }
     }
+
+    public void PlayBackgroundMusic() {
+        if (Background != null)
+
+        {
+            musicSource.clip = Background;
+            musicSource.Play();
+        }
+    }
+
 
     
 }

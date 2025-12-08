@@ -11,6 +11,8 @@ public class BattleSide : MonoBehaviour
     void Start()
     {
         slots = GetComponentsInChildren<CardSlot>();
+        AudioManager.Instance.PlayBackgroundMusic();
+        AudioManager.Instance.PlayBackgroundMusic();
     }
 
     public int TribalCount()

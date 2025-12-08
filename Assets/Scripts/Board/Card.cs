@@ -6,6 +6,7 @@ public class Card : MonoBehaviour
 {
     [Header("Card Data")]
     public CardData Data { get; private set; }
+    
     public Sprite cardImage;
 
     [Header("Runtime Stats")]
@@ -26,6 +27,7 @@ public class Card : MonoBehaviour
     [Header("Interaction")]
     public LayerMask slotLayerMask;
     public CardSlot currentSlot;
+    public CardShaker Shaker;
     private Vector3 dragOffset;
     public float boardHeight = -1f;
     public float dragLiftSpeed = 15f;
@@ -53,6 +55,7 @@ public class Card : MonoBehaviour
     public Ability Abilities => Data?.Abilities ?? Ability.None;
     public bool HasAbility(Ability ability) => Data?.HasAbility(ability) ?? false;
     public IEnumerable<Ability> GetActiveAbilities() => Data.GetActiveAbilities();
+    public void Shake(float duration, float magnitude) => Shaker.Shake(duration, magnitude);
 
     void Start()
     {

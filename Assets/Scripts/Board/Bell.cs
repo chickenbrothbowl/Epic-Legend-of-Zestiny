@@ -40,7 +40,7 @@ public class Bell : MonoBehaviour
         if (gameStateManager.isPlayerTurn)
         {
             AudioManager.Instance.BellTapsound();
-            gameStateManager.EndPlayerTurn();
+            StartCoroutine(gameStateManager.EndPlayerTurn());
         }
     }
 

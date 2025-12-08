@@ -9,9 +9,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 54a334b5401c93d40b0cf9a760043c57, type: 3}
-  m_Name: Wild Animals
-  m_EditorClassIdentifier: Assembly-CSharp::EnemyDeckAsset
+  m_Script: {fileID: 11500000, guid: f25be5a4e8624320a93b950aa1a166af, type: 3}
+  m_Name: WildAnimals
+  m_EditorClassIdentifier: Assembly-CSharp::DeckAsset
   cardIDs:
   - wolf_lemon
+  - sourpuss
+  - rat
+  - wolf_lemon
   - bat
+  - bat
+  - wolf_lemon
+  - sourpuss
+  - rat
+  - wolf_lemon

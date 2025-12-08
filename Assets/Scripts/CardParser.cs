@@ -52,7 +52,7 @@ public static class CardParser
 
     public static List<CardData> ParseCsv()
     {
-        string path = Path.Combine(Application.dataPath, "Scripts/Data/lemon_document.csv");
+        string path = Path.Combine(Application.dataPath, "Resources/Data/lemon_document.csv");
 
         if (!File.Exists(path))
         {
@@ -76,7 +76,6 @@ public static class CardParser
             int.TryParse(columns[3], out int damage);
             int.TryParse(columns[4], out int health);
 
-            // Parse all abilities in one pass
             Ability abilities = Ability.None;
             foreach (var kvp in ColumnToAbility)
             {

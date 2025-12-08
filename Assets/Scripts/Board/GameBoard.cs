@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 // GameBoard now just coordinates
 public class GameBoard : MonoBehaviour
@@ -8,17 +9,17 @@ public class GameBoard : MonoBehaviour
     public GameStateManager manager;
 
     [ContextMenu("Process Attacks")]
-    public void DoAttacks()
+    public IEnumerator DoAttacks()
     {
         if (manager.isPlayerTurn)
         {
-            playerSide.AttackOpposingSide(enemySide);
-            enemySide.AttackOpposingSide(playerSide);
+            yield return StartCoroutine(playerSide.AttackOpposingSide(enemySide));
+            yield return StartCoroutine(enemySide.AttackOpposingSide(playerSide));
         }
         else
         {
-            enemySide.AttackOpposingSide(playerSide);
-            playerSide.AttackOpposingSide(enemySide);
+            yield return StartCoroutine(enemySide.AttackOpposingSide(playerSide));
+            yield return StartCoroutine(playerSide.AttackOpposingSide(enemySide));
         }
     }
 }

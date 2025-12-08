@@ -1,4 +1,6 @@
 using UnityEngine;
+using System.Collections;
+
 
 public class GameStateManager : MonoBehaviour
 {
@@ -33,9 +35,9 @@ public class GameStateManager : MonoBehaviour
 		}	
     }
 
-    public void EndPlayerTurn()
+    public IEnumerator EndPlayerTurn()
     {
-        board.DoAttacks();
+        yield return StartCoroutine(board.DoAttacks());
         isPlayerTurn = false;
         DoEnemyTurn();
     }

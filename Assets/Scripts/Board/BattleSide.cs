@@ -1,4 +1,6 @@
 using UnityEngine;
+using System.Collections;
+
 
 public class BattleSide : MonoBehaviour
 {
@@ -48,7 +50,7 @@ public class BattleSide : MonoBehaviour
         }
     }
 
-    public void AttackOpposingSide(BattleSide opponent)
+    public IEnumerator AttackOpposingSide(BattleSide opponent)
     {
         Debug.Log("Attacking " + opponent + " Side");
         for (int i = 0; i < slots.Length; i++)
@@ -60,19 +62,19 @@ public class BattleSide : MonoBehaviour
                 if (i < opponent.slots.Length && !opponent.slots[i].IsEmpty)
                 {
                     Card defender = opponent.slots[i].currentCard;
-                    CombatResolver.CardVsCard(attacker, defender, opponent.player, this.player);
+                    yield return StartCoroutine(CombatResolver.CardVsCard(attacker, defender, opponent.player, this.player));
                 }
                 else
                 {
                     if (isPlayerSide == true)
                     {
                         Debug.Log("Attacking Enemy");
-                        CombatResolver.CardVsPlayer(attacker, opponent.player, this.player);
+                        yield return StartCoroutine(CombatResolver.CardVsPlayer(attacker, opponent.player, this.player));
                     }
                     else
                     {
                         Debug.Log("Attacking Player");
-                        CombatResolver.CardVsPlayer(attacker, opponent.player, this.player);
+                        yield return StartCoroutine(CombatResolver.CardVsPlayer(attacker, opponent.player, this.player));
                     }
                 }
             }
@@ -137,9 +139,12 @@ public static class CombatResolver
     // Static keywords: harvest, juicy, rotten, tribal
     // Triggered keywords: catch, gluttenous, juiced, opportunist
 
-    public static void CardVsCard(Card attacker, Card defender, Player target, Player you)
+    public static IEnumerator CardVsCard(Card attacker, Card defender, Player target, Player you)
     {
         Debug.Log("Card Vs Card");
+        attacker.Shake(1f, .01f);
+        yield return new WaitForSeconds(1f); // Wait for .25 seconds
+
 
         if (defender.HasAbility(Ability.Rotten) && 
             !attacker.HasAbility(Ability.Hardened) && 
@@ -222,16 +227,20 @@ public static class CombatResolver
         }
     }
 
-    public static void CardVsPlayer(Card attacker, Player target, Player you)
+    public static IEnumerator CardVsPlayer(Card attacker, Player target, Player you)
     {
         Debug.Log("Card Vs Player");
         Debug.Log("Dealing " + attacker.attackValue + " damage to " + target.name);
-
+        attacker.Shake(1f, .01f);
+        
         target.DealDamage(attacker.attackValue, target);
+        yield return new WaitForSeconds(1f); // Wait for .25 seconds
 
         if (attacker.HasAbility(Ability.Vampire))
         {
             you.DealDamage(-attacker.attackValue, target);
         }
+        
+        
     }
 }

@@ -37,11 +37,13 @@ public class LifePool : MonoBehaviour
     private void DoWin()
     {
         Debug.Log("You win!");
+        manager.PlayerWin();
     }
 
     private void DoLose()
     {
         Debug.Log("You lose!");
+        manager.PlayerLose();
     }
 
     private void SendCounterToPosition()

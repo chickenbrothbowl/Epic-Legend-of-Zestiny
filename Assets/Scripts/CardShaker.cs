@@ -15,6 +15,12 @@ public class CardShaker : MonoBehaviour
 
         while (elapsed < duration)
         {
+            if (Time.timeScale == 0f)
+            {
+                transform.localPosition = originalPosition;
+                yield break;
+            }
+            
             float x = Random.Range(-1f, 1f) * magnitude;
             float y = Random.Range(-1f, 1f) * magnitude;
 

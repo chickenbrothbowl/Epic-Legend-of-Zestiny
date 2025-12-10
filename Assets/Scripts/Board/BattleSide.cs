@@ -153,7 +153,7 @@ public static class CombatResolver
 
         if (attacker.HasAbility(Ability.Vampire))
         {
-            if (!defender.HasAbility(Ability.Flying) && !defender.HasAbility(Ability.Reach))
+            if (!defender.HasAbility(Ability.Flying) && !defender.HasAbility(Ability.Finesse))
             {
                 target.DealDamage(attacker.attackValue, target);
                 you.DealDamage(-attacker.attackValue, target);
@@ -166,33 +166,9 @@ public static class CombatResolver
         }
         else if (attacker.HasAbility(Ability.Flying) && 
                  !defender.HasAbility(Ability.Flying) && 
-                 !defender.HasAbility(Ability.Reach))
+                 !defender.HasAbility(Ability.Finesse))
         {
             target.DealDamage(attacker.attackValue, target);
-        }
-        else if (defender.HasAbility(Ability.Finesse))
-        {
-            if (defender.attackValue > attacker.defenseValue)
-            {
-                Debug.Log("Finesse activated");
-                Debug.Log("Defender Attack: " + defender.attackValue);
-                Debug.Log("Attacker Defense: " + attacker.defenseValue);
-                attacker.defenseValue = 0;
-            }
-            else
-            {
-                defender.defenseValue -= attacker.attackValue;
-            }
-
-            if (attacker.HasAbility(Ability.Acidic))
-            {
-                defender.defenseValue -= 1;
-            }
-
-            if (attacker.HasAbility(Ability.Corrosive))
-            {
-                defender.attackValue -= 1;
-            }
         }
         else if (attacker.HasAbility(Ability.Pummel) && (attacker.attackValue > defender.defenseValue))
         {

@@ -1,5 +1,7 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 
 public class GameStateManager : MonoBehaviour
@@ -16,6 +18,8 @@ public class GameStateManager : MonoBehaviour
     public DeckLayout playerDeck;
     public CardHandLayout playerHand;
     public GameBoard board;
+    public Button winButton;
+    public Button loseButton;
     
     [HideInInspector]
     public bool isPlayerTurn = true;
@@ -33,6 +37,32 @@ public class GameStateManager : MonoBehaviour
 		if (playerHand.cards.Count >= handSize){
 			playerDeck.canDraw = false;
 		}	
+    }
+
+    public void PlayerWin()
+    {
+        winButton.gameObject.SetActive(true);
+        Time.timeScale = 0f;
+        StopAllCoroutines();
+    }
+
+    public void PlayerLose()
+    {
+        loseButton.gameObject.SetActive(true);
+        Time.timeScale = 0f;
+        StopAllCoroutines();
+    }
+
+    public void RestartGame()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void BackToMap()
+    {
+        Time.timeScale = 1f;
+        //SceneManager.LoadScene("SampleScene");
     }
 
     public IEnumerator EndPlayerTurn()

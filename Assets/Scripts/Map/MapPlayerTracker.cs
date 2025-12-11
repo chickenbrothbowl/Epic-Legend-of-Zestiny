@@ -64,15 +64,20 @@ namespace Map
 
         void LoadGameAgainstDeck(DeckAsset enemyDeck)
         {
-            LoadGameWithDecks(PersistentStateManager.Instance.playerDeckAsset, enemyDeck);
+            LoadGameWithDecks(PersistentStateManager.Instance.playerDeckAsset, enemyDeck, "Battle");
         }
 
-        void LoadGameWithDecks(DeckAsset playerDeck, DeckAsset enemyDeck)
+		void LoadTreasureWithDeck(DeckAsset enemyDeck)
+        {
+            LoadGameWithDecks(PersistentStateManager.Instance.playerDeckAsset, enemyDeck, "Treasure");
+        }
+
+        void LoadGameWithDecks(DeckAsset playerDeck, DeckAsset enemyDeck, String sceneName)
         {
             pendingPlayerDeck = playerDeck;
             pendingEnemyDeck = enemyDeck;
             SceneManager.sceneLoaded += OnSceneLoaded;
-            SceneManager.LoadScene("Battle");
+            SceneManager.LoadScene(sceneName);
         }
 
         void OnSceneLoaded(Scene scene, LoadSceneMode mode)
@@ -123,10 +128,12 @@ namespace Map
                     Instance.LoadGameAgainstDeck(enemyDeck);
                     break;
                 case NodeType.RestSite:
-                    SceneManager.LoadScene("Treasure");
+                    enemyDeck = GetDeck("WildAnimals");
+					Instance.LoadTreasureWithDeck(enemyDeck);
                     break;
                 case NodeType.Treasure:
-                    SceneManager.LoadScene("Treasure");
+                    enemyDeck = GetDeck("goblins 1");
+					Instance.LoadTreasureWithDeck(enemyDeck);
                     break;
                 case NodeType.Store:
                     SceneManager.LoadScene("Store");

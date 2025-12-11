@@ -15,6 +15,7 @@ public class Deck : MonoBehaviour
     {
         PopulateDeck();
         UpdateCardsArray();
+        Shuffle();
         ArrangeCards();
     }
 
@@ -27,6 +28,27 @@ public class Deck : MonoBehaviour
             previousChildCount = transform.childCount;
         }
     }
+
+    protected virtual void Shuffle()
+    {
+        for (int i = cards.Count - 1; i > 0; i--)
+        {
+            int randomIndex = Random.Range(0, i + 1);
+
+            GameObject temp = cards[i];
+            cards[i] = cards[randomIndex];
+            cards[randomIndex] = temp;
+        }
+
+        // Re-parent cards in the new order to match the list
+        for (int i = 0; i < cards.Count; i++)
+        {
+            cards[i].transform.SetSiblingIndex(i);
+        }
+
+        ArrangeCards();
+    }
+
 
     protected virtual void PopulateDeck()
     {
@@ -70,33 +92,48 @@ public class Deck : MonoBehaviour
         }
     }
 
-    public virtual void ArrangeCards()
-    {
-        if (cards.Count == 0) return;
+public virtual void ArrangeCards()
+{
+    if (cards.Count == 0) return;
 
-        for (int i = 0; i < cards.Count; i++)
-        {
-            Vector3 targetPosition = transform.position;
-            targetPosition.y += i * yIncrement;
-            StartCoroutine(AnimateToPosition(cards[i], targetPosition));
-        }
+    for (int i = 0; i < cards.Count; i++)
+    {
+        Vector3 targetPosition = transform.position;
+        targetPosition.y += i * yIncrement;
+        
+        Quaternion targetRotation = transform.rotation;
+        // Optionally add per-card rotation offset here, e.g.:
+        // targetRotation *= Quaternion.Euler(0f, i * rotationIncrement, 0f);
+        
+        StartCoroutine(AnimateToPositionAndRotation(cards[i], targetPosition, targetRotation));
+    }
+}
+
+protected IEnumerator AnimateToPositionAndRotation(GameObject card, Vector3 targetPosition, Quaternion targetRotation)
+{
+    if (card == null) yield break;
+
+    while (Vector3.Distance(card.transform.position, targetPosition) > 0.01f ||
+           Quaternion.Angle(card.transform.rotation, targetRotation) > 0.5f)
+    {
+        float lerpFactor = Mathf.Min(Time.deltaTime * animationSpeed, 0.5f);
+        
+        card.transform.position = Vector3.Lerp(
+            card.transform.position,
+            targetPosition,
+            lerpFactor
+        );
+        
+        card.transform.rotation = Quaternion.Slerp(
+            card.transform.rotation,
+            targetRotation,
+            lerpFactor
+        );
+        
+        yield return null;
     }
 
-    protected IEnumerator AnimateToPosition(GameObject card, Vector3 targetPosition)
-    {
-        if (card == null) yield break;
-
-        while (Vector3.Distance(card.transform.position, targetPosition) > 0.01f)
-        {
-            float lerpFactor = Mathf.Min(Time.deltaTime * animationSpeed, 0.5f);
-            card.transform.position = Vector3.Lerp(
-                card.transform.position,
-                targetPosition,
-                lerpFactor
-            );
-            yield return null;
-        }
-
-        card.transform.position = targetPosition;
-    }
+    card.transform.position = targetPosition;
+    card.transform.rotation = targetRotation;
+}
 }

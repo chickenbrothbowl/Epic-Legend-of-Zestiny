@@ -79,7 +79,6 @@ namespace Map
         {
             GameObject.Find("Deck").GetComponent<Deck>().deckAsset = pendingPlayerDeck;
             
-            
             GameObject.Find("EnemyDeck").GetComponent<Deck>().deckAsset = pendingEnemyDeck;
     
             SceneManager.sceneLoaded -= OnSceneLoaded;

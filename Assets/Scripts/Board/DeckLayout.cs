@@ -32,7 +32,9 @@ public class DeckLayout : Deck
         }
         else
         {
-            StopShaking(topCard);
+			if (isShaking) {
+				StopShaking(topCard);
+			}
         }
     }
 

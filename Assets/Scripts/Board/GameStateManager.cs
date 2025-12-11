@@ -101,4 +101,10 @@ public class GameStateManager : MonoBehaviour
         }
         return count;
     }
+
+    public void OpenMap()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene("SampleSceneUI", LoadSceneMode.Additive);
+    }
 }

@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Rendering;
+using UnityEngine.SceneManagement;
 
 public class CardSlot : MonoBehaviour
 {
@@ -21,13 +22,12 @@ public class CardSlot : MonoBehaviour
     private Material borderMaterial;
     private static readonly int EmissionColor = Shader.PropertyToID("_EmissionColor");
 
-    private JuiceLevel juice;
+    public JuiceLevel juice;
     
     public bool IsEmpty => currentCard == null;
     
     void Start()
     {
-        juice = transform.parent.parent.GetComponent<GameBoard>().manager.juice;
         CreateBorderFrame();
         SetBorderGlow(normalColor, 0);
     }
@@ -100,7 +100,10 @@ public class CardSlot : MonoBehaviour
     public void PlaceCard(Card card)
     {
         if (!IsEmpty) return;
-        juice.SetJuice(juice.juiceAmnt -= card.Data.Cost);
+        if (juice)
+        {
+            juice.SetJuice(juice.juiceAmnt -= card.Data.Cost);
+        }
         currentCard = card;
         card.transform.SetParent(transform);
         card.transform.localPosition = Vector3.zero;

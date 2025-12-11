@@ -176,6 +176,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6582314401668829746, guid: 0025adc5b19374c85bfea75177ba7d8b, type: 3}
+      propertyPath: juice
+      value: 
+      objectReference: {fileID: 8274470406823356863}
+    - target: {fileID: 6582314401668829746, guid: 0025adc5b19374c85bfea75177ba7d8b, type: 3}
       propertyPath: slotIndex
       value: 5
       objectReference: {fileID: 0}
@@ -244,6 +248,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6582314401668829746, guid: 0025adc5b19374c85bfea75177ba7d8b, type: 3}
+      propertyPath: juice
+      value: 
+      objectReference: {fileID: 8274470406823356863}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -466,6 +474,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6582314401668829746, guid: 0025adc5b19374c85bfea75177ba7d8b, type: 3}
+      propertyPath: juice
+      value: 
+      objectReference: {fileID: 8274470406823356863}
+    - target: {fileID: 6582314401668829746, guid: 0025adc5b19374c85bfea75177ba7d8b, type: 3}
       propertyPath: slotIndex
       value: 4
       objectReference: {fileID: 0}
@@ -595,6 +607,52 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4130865657531461969, guid: 0025adc5b19374c85bfea75177ba7d8b, type: 3}
   m_PrefabInstance: {fileID: 1291273980}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &771063408
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 771063410}
+  - component: {fileID: 771063409}
+  m_Layer: 0
+  m_Name: PersistentStateManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &771063409
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 771063408}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39caa54951333476387d60c1dc997814, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PersistentStateManager
+  playerDeckAsset: {fileID: 0}
+  princeDeckAsset: {fileID: 0}
+--- !u!4 &771063410
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 771063408}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &919455822
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -754,7 +812,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1763896161}
         m_TargetAssemblyTypeName: GameStateManager, Assembly-CSharp
-        m_MethodName: RestartGame
+        m_MethodName: OpenMap
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1142,6 +1200,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6582314401668829746, guid: 0025adc5b19374c85bfea75177ba7d8b, type: 3}
+      propertyPath: juice
+      value: 
+      objectReference: {fileID: 8274470406823356863}
+    - target: {fileID: 6582314401668829746, guid: 0025adc5b19374c85bfea75177ba7d8b, type: 3}
       propertyPath: slotIndex
       value: 1
       objectReference: {fileID: 0}
@@ -1281,6 +1343,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6582314401668829746, guid: 0025adc5b19374c85bfea75177ba7d8b, type: 3}
+      propertyPath: juice
+      value: 
+      objectReference: {fileID: 8274470406823356863}
     - target: {fileID: 6582314401668829746, guid: 0025adc5b19374c85bfea75177ba7d8b, type: 3}
       propertyPath: slotIndex
       value: 6
@@ -2283,6 +2349,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6582314401668829746, guid: 0025adc5b19374c85bfea75177ba7d8b, type: 3}
+      propertyPath: juice
+      value: 
+      objectReference: {fileID: 8274470406823356863}
+    - target: {fileID: 6582314401668829746, guid: 0025adc5b19374c85bfea75177ba7d8b, type: 3}
       propertyPath: slotIndex
       value: 3
       objectReference: {fileID: 0}
@@ -2627,6 +2697,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6582314401668829746, guid: 0025adc5b19374c85bfea75177ba7d8b, type: 3}
+      propertyPath: juice
+      value: 
+      objectReference: {fileID: 8274470406823356863}
+    - target: {fileID: 6582314401668829746, guid: 0025adc5b19374c85bfea75177ba7d8b, type: 3}
       propertyPath: slotIndex
       value: 7
       objectReference: {fileID: 0}
@@ -2936,6 +3010,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6582314401668829746, guid: 0025adc5b19374c85bfea75177ba7d8b, type: 3}
+      propertyPath: juice
+      value: 
+      objectReference: {fileID: 8274470406823356863}
     - target: {fileID: 6582314401668829746, guid: 0025adc5b19374c85bfea75177ba7d8b, type: 3}
       propertyPath: slotIndex
       value: 2
@@ -4214,3 +4292,4 @@ SceneRoots:
   - {fileID: 2014053477}
   - {fileID: 919455822}
   - {fileID: 1921194080}
+  - {fileID: 771063410}

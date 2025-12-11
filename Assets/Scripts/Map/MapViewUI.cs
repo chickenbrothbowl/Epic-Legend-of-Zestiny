@@ -191,7 +191,6 @@ namespace Map
                                                     offsetFromNodes, (float) i / (linePointsCount - 1)));
             }
             
-            Debug.Log("From: " + fromPoint + " to: " + toPoint + " last point: " + list[list.Count - 1]);
 
             lineRenderer.Points = list.ToArray();
 

@@ -246,6 +246,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1 &87079197 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1258143501203710067, guid: 0025adc5b19374c85bfea75177ba7d8b, type: 3}
+  m_PrefabInstance: {fileID: 88603850}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &88603850
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -303,13 +308,20 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6582314401668829746, guid: 0025adc5b19374c85bfea75177ba7d8b, type: 3}
+      propertyPath: juice
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6582314401668829746, guid: 0025adc5b19374c85bfea75177ba7d8b, type: 3}
       propertyPath: slotIndex
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1258143501203710067, guid: 0025adc5b19374c85bfea75177ba7d8b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1001383542}
   m_SourcePrefab: {fileID: 100100000, guid: 0025adc5b19374c85bfea75177ba7d8b, type: 3}
 --- !u!1 &112302015
 GameObject:
@@ -586,14 +598,40 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6582314401668829746, guid: 0025adc5b19374c85bfea75177ba7d8b, type: 3}
+      propertyPath: juice
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6582314401668829746, guid: 0025adc5b19374c85bfea75177ba7d8b, type: 3}
       propertyPath: slotIndex
       value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1258143501203710067, guid: 0025adc5b19374c85bfea75177ba7d8b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2121927942}
   m_SourcePrefab: {fileID: 100100000, guid: 0025adc5b19374c85bfea75177ba7d8b, type: 3}
+--- !u!1 &247939938 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1258143501203710067, guid: 0025adc5b19374c85bfea75177ba7d8b, type: 3}
+  m_PrefabInstance: {fileID: 594362315}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &247939941
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 247939938}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7234a1cb53ef468a9fd6d421f89bc9cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ClickableSlot
+  playerDeck: {fileID: 1597088496}
+  enemyDeck: {fileID: 1349692494}
 --- !u!1 &473980244
 GameObject:
   m_ObjectHideFlags: 0
@@ -717,6 +755,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 526522233}
   m_Mesh: {fileID: 3909233067320746374, guid: 4ecc4780f4eea4147aba58083a55f819, type: 3}
+--- !u!1 &531571395 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1258143501203710067, guid: 0025adc5b19374c85bfea75177ba7d8b, type: 3}
+  m_PrefabInstance: {fileID: 241060150}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &594362315
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -773,10 +816,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6582314401668829746, guid: 0025adc5b19374c85bfea75177ba7d8b, type: 3}
+      propertyPath: juice
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1258143501203710067, guid: 0025adc5b19374c85bfea75177ba7d8b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 247939941}
   m_SourcePrefab: {fileID: 100100000, guid: 0025adc5b19374c85bfea75177ba7d8b, type: 3}
 --- !u!1 &700006963
 GameObject:
@@ -961,6 +1011,20 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4130865657531461969, guid: 0025adc5b19374c85bfea75177ba7d8b, type: 3}
   m_PrefabInstance: {fileID: 88603850}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1001383542
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 87079197}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7234a1cb53ef468a9fd6d421f89bc9cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ClickableSlot
+  playerDeck: {fileID: 1597088496}
+  enemyDeck: {fileID: 1349692494}
 --- !u!1 &1009420815
 GameObject:
   m_ObjectHideFlags: 0
@@ -1121,6 +1185,52 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1188690661
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1188690663}
+  - component: {fileID: 1188690662}
+  m_Layer: 0
+  m_Name: PersistentStateManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1188690662
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1188690661}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39caa54951333476387d60c1dc997814, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PersistentStateManager
+  playerDeckAsset: {fileID: 11400000, guid: 39fbc6ed717b5460599b3145072fcb19, type: 2}
+  princeDeckAsset: {fileID: 11400000, guid: c022b68e2445e456c8620db2673ef907, type: 2}
+--- !u!4 &1188690663
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1188690661}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1198769086
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1201,6 +1311,7 @@ GameObject:
   - component: {fileID: 1349692494}
   - component: {fileID: 1349692493}
   - component: {fileID: 1349692492}
+  - component: {fileID: 1349692495}
   m_Layer: 0
   m_Name: EnemyDeck
   m_TagString: Untagged
@@ -1262,6 +1373,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+--- !u!114 &1349692495
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1349692491}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec2e16aa4c3e491b942efc2ee84075e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FillSlots
+  side: {fileID: 1770826236}
 --- !u!1 &1429723867
 GameObject:
   m_ObjectHideFlags: 0
@@ -1386,7 +1510,7 @@ MonoBehaviour:
   animationSpeed: 5
   deckAsset: {fileID: 11400000, guid: e4d9ae9df39574aea934dd516a21914c, type: 2}
   card: {fileID: 7124592944193891571, guid: 5cad9f05812fb4598ab8b67bc1e4c41e, type: 3}
-  canDraw: 1
+  canDraw: 0
   hand: {fileID: 0}
   shakeSpeed: 40
   shakeAmount: 1
@@ -1446,7 +1570,7 @@ Transform:
   m_GameObject: {fileID: 1770826235}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3, y: -1.03, z: -0.5}
+  m_LocalPosition: {x: 1, y: -1.03, z: -0.5}
   m_LocalScale: {x: 20, y: 1, z: 20}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1597,6 +1721,20 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4130865657531461969, guid: 0025adc5b19374c85bfea75177ba7d8b, type: 3}
   m_PrefabInstance: {fileID: 241060150}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2121927942
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 531571395}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7234a1cb53ef468a9fd6d421f89bc9cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ClickableSlot
+  playerDeck: {fileID: 1597088496}
+  enemyDeck: {fileID: 1349692494}
 --- !u!1 &2131442741
 GameObject:
   m_ObjectHideFlags: 0
@@ -1701,3 +1839,4 @@ SceneRoots:
   - {fileID: 1009420819}
   - {fileID: 112302020}
   - {fileID: 1198769086}
+  - {fileID: 1188690663}

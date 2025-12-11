@@ -2,6 +2,7 @@
 using System.Linq;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Map
 {
@@ -58,6 +59,38 @@ namespace Map
 
             DOTween.Sequence().AppendInterval(enterNodeDelay).OnComplete(() => EnterNode(mapNode));
         }
+        private DeckAsset pendingPlayerDeck;
+        private DeckAsset pendingEnemyDeck;
+
+        void LoadGameAgainstDeck(DeckAsset enemyDeck)
+        {
+            LoadGameWithDecks(PersistentStateManager.Instance.playerDeckAsset, enemyDeck);
+        }
+
+        void LoadGameWithDecks(DeckAsset playerDeck, DeckAsset enemyDeck)
+        {
+            pendingPlayerDeck = playerDeck;
+            pendingEnemyDeck = enemyDeck;
+            SceneManager.sceneLoaded += OnSceneLoaded;
+            SceneManager.LoadScene("Battle");
+        }
+
+        void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+        {
+            GameObject.Find("Deck").GetComponent<Deck>().deckAsset = pendingPlayerDeck;
+            
+            
+            GameObject.Find("EnemyDeck").GetComponent<Deck>().deckAsset = pendingEnemyDeck;
+    
+            SceneManager.sceneLoaded -= OnSceneLoaded;
+        }
+
+        public static DeckAsset GetDeck(string deckName)
+        {
+            DeckAsset deckAsset = Resources.Load<DeckAsset>($"Data/EnemyDecks/{deckName}");
+            Debug.Log(deckAsset);
+            return deckAsset;
+        }
 
         private static void EnterNode(MapNode mapNode)
         {
@@ -66,19 +99,42 @@ namespace Map
             // load appropriate scene with context based on nodeType:
             // or show appropriate GUI over the map: 
             // if you choose to show GUI in some of these cases, do not forget to set "Locked" in MapPlayerTracker back to false
+            DeckAsset enemyDeck;
             switch (mapNode.Node.nodeType)
             {
+                
                 case NodeType.MinorEnemy:
+                    int randomIndex = UnityEngine.Random.Range(0, 2); // Max is exclusive!
+                    switch (randomIndex)
+                    {
+                        case 0:
+                            enemyDeck = GetDeck("goblins 1");
+                            break;
+                        case 1:
+                            enemyDeck = GetDeck("WildAnimals");
+                            break;
+                        default:
+                            enemyDeck = GetDeck("goblins 1");
+                            break;
+                    }
+                    Instance.LoadGameAgainstDeck(enemyDeck);
                     break;
                 case NodeType.EliteEnemy:
+                    enemyDeck = GetDeck("Limoncello");
+                    Instance.LoadGameAgainstDeck(enemyDeck);
                     break;
                 case NodeType.RestSite:
+                    SceneManager.LoadScene("Treasure");
                     break;
                 case NodeType.Treasure:
+                    SceneManager.LoadScene("Treasure");
                     break;
                 case NodeType.Store:
+                    SceneManager.LoadScene("Store");
                     break;
                 case NodeType.Boss:
+                    enemyDeck = GetDeck("Limoncello");
+                    Instance.LoadGameAgainstDeck(enemyDeck);
                     break;
                 case NodeType.Mystery:
                     break;

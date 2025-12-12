@@ -153,18 +153,10 @@ public static class CombatResolver
 
         if (attacker.HasAbility(Ability.Vampire))
         {
-            if (!defender.HasAbility(Ability.Flying) && !defender.HasAbility(Ability.Finesse))
-            {
-                target.DealDamage(attacker.attackValue, target);
-                you.DealDamage(-attacker.attackValue, target);
-            }
-            else
-            {
-                defender.defenseValue -= attacker.attackValue;
-                you.DealDamage(-attacker.attackValue, target);
-            }
+            you.DealDamage(-attacker.attackValue, target);
         }
-        else if (attacker.HasAbility(Ability.Flying) && 
+
+        if (attacker.HasAbility(Ability.Flying) && 
                  !defender.HasAbility(Ability.Flying) && 
                  !defender.HasAbility(Ability.Finesse))
         {
@@ -193,6 +185,10 @@ public static class CombatResolver
         {
             attacker.attackValue -= 1;
             defender.defenseValue -= attacker.attackValue;
+        }
+        else if (defender.HasAbility(Ability.Flying) && !attacker.HasAbility(Ability.Flying) && !attacker.HasAbility(Ability.Finesse))
+        {
+            target.DealDamage(attacker.attackValue, target);
         }
         else
         {

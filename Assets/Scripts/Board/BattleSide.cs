@@ -138,7 +138,6 @@ public static class CombatResolver
 
     public static IEnumerator CardVsCard(Card attacker, Card defender, Player target, Player you)
     {
-        Debug.Log("Card Vs Card");
         attacker.Shake(1f, .01f);
         yield return new WaitForSeconds(1f); // Wait for .25 seconds
 
@@ -194,6 +193,9 @@ public static class CombatResolver
         {
             defender.defenseValue -= attacker.attackValue;
         }
+
+        attacker.RefreshVisuals();
+        defender.RefreshVisuals();
     }
 
     public static IEnumerator CardVsPlayer(Card attacker, Player target, Player you)

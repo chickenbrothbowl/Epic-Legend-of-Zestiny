@@ -13,12 +13,10 @@ MonoBehaviour:
   m_Name: goblins 1
   m_EditorClassIdentifier: Assembly-CSharp::DeckAsset
   cardIDs:
-  - goblemon
-  - goblemon
-  - mobhobgoblemon
-  - goblemon
-  - hobgoblemon
-  - goblemon
-  - goblemon
-  - lemon_soldier
-  - wolf_lemon
+  - lemon_licker
+  - lemon_licker
+  - lemon_licker
+  - lemon_licker
+  - lemon_wedge
+  - lemon_wedge
+  - lemon_wedge

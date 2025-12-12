@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: PlayerDecl
   m_EditorClassIdentifier: Assembly-CSharp::DeckAsset
   cardIDs:
-  - rindeater
-  - lemon_drop
-  - lemon_drop
-  - sourpuss
-  - sourpuss
-  - wedge_warrior
+  - lemon_licker
   - lemon_wedge
+  - lemon_wedge
+  - lemon_wedge
+  - lemon_licker
+  - lemon_licker
+  - lemon_licker
+  - lemon_licker

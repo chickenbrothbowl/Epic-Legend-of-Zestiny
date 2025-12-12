@@ -22,7 +22,7 @@ public class CardSlot : MonoBehaviour
     private Material borderMaterial;
     private static readonly int EmissionColor = Shader.PropertyToID("_EmissionColor");
 
-    public JuiceLevel juice;
+    public GameStateManager gsm;
     
     public bool IsEmpty => currentCard == null;
     
@@ -33,7 +33,7 @@ public class CardSlot : MonoBehaviour
     }
 
 	public bool CanPlay(Card card){
-		return IsEmpty && card.Data.Cost <= juice.juiceAmnt;
+		return IsEmpty && card.Data.Cost <= gsm.juice.juiceAmnt && gsm.isPlayerTurn;
 	}
     
     void CreateBorderFrame()
@@ -100,9 +100,9 @@ public class CardSlot : MonoBehaviour
     public void PlaceCard(Card card)
     {
         if (!IsEmpty) return;
-        if (juice)
+        if (gsm)
         {
-            juice.SetJuice(juice.juiceAmnt -= card.Data.Cost);
+            gsm.juice.SetJuice(gsm.juice.juiceAmnt -= card.Data.Cost);
         }
         currentCard = card;
         card.transform.SetParent(transform);

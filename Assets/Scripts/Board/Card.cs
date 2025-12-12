@@ -79,7 +79,7 @@ public class Card : MonoBehaviour
             BattleSide side = GetComponentInParent<BattleSide>();
             OnCardDied?.Invoke(this, side);
 			CardSlot slot = GetComponentInParent<CardSlot>();
-			// Shouldn't be necessary but in case it helped fix the bug
+			//Shouldn't be necessary but in case it helped fix the bug
 			slot.currentCard = null;
             Destroy(gameObject);
         }

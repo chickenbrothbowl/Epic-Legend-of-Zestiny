@@ -67,8 +67,8 @@ public class GameStateManager : MonoBehaviour
 
     public IEnumerator EndPlayerTurn()
     {
+		isPlayerTurn = false;
         yield return StartCoroutine(board.DoAttacks());
-        isPlayerTurn = false;
         DoEnemyTurn();
     }
 

@@ -7,6 +7,7 @@ public class DeckLayout : Deck
     public GameObject hand;
     private CardHandLayout handLayout;
     private bool isShaking;
+	public GameStateManager gsm;
 
     [Header("Shake Settings")]
     public float shakeSpeed = 8f;
@@ -40,7 +41,7 @@ public class DeckLayout : Deck
 
     void OnMouseDown()
     {
-        if (canDraw)
+        if (canDraw && gsm.isPlayerTurn)
         {
             DrawCard();
             isShaking = false;

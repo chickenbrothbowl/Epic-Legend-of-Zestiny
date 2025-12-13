@@ -176,6 +176,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6582314401668829746, guid: 0025adc5b19374c85bfea75177ba7d8b, type: 3}
+      propertyPath: gsm
+      value: 
+      objectReference: {fileID: 1763896161}
+    - target: {fileID: 6582314401668829746, guid: 0025adc5b19374c85bfea75177ba7d8b, type: 3}
       propertyPath: juice
       value: 
       objectReference: {fileID: 8274470406823356863}
@@ -248,6 +252,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6582314401668829746, guid: 0025adc5b19374c85bfea75177ba7d8b, type: 3}
+      propertyPath: gsm
+      value: 
+      objectReference: {fileID: 1763896161}
     - target: {fileID: 6582314401668829746, guid: 0025adc5b19374c85bfea75177ba7d8b, type: 3}
       propertyPath: juice
       value: 
@@ -473,6 +481,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6582314401668829746, guid: 0025adc5b19374c85bfea75177ba7d8b, type: 3}
+      propertyPath: gsm
+      value: 
+      objectReference: {fileID: 1763896161}
     - target: {fileID: 6582314401668829746, guid: 0025adc5b19374c85bfea75177ba7d8b, type: 3}
       propertyPath: juice
       value: 
@@ -1200,6 +1212,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6582314401668829746, guid: 0025adc5b19374c85bfea75177ba7d8b, type: 3}
+      propertyPath: gsm
+      value: 
+      objectReference: {fileID: 1763896161}
+    - target: {fileID: 6582314401668829746, guid: 0025adc5b19374c85bfea75177ba7d8b, type: 3}
       propertyPath: juice
       value: 
       objectReference: {fileID: 8274470406823356863}
@@ -1249,6 +1265,7 @@ MonoBehaviour:
   card: {fileID: 7124592944193891571, guid: 5cad9f05812fb4598ab8b67bc1e4c41e, type: 3}
   canDraw: 1
   hand: {fileID: 1554178400}
+  gsm: {fileID: 0}
   shakeSpeed: 40
   shakeAmount: 1
 --- !u!4 &1281726977
@@ -1343,6 +1360,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6582314401668829746, guid: 0025adc5b19374c85bfea75177ba7d8b, type: 3}
+      propertyPath: gsm
+      value: 
+      objectReference: {fileID: 1763896161}
     - target: {fileID: 6582314401668829746, guid: 0025adc5b19374c85bfea75177ba7d8b, type: 3}
       propertyPath: juice
       value: 
@@ -2349,6 +2370,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6582314401668829746, guid: 0025adc5b19374c85bfea75177ba7d8b, type: 3}
+      propertyPath: gsm
+      value: 
+      objectReference: {fileID: 1763896161}
+    - target: {fileID: 6582314401668829746, guid: 0025adc5b19374c85bfea75177ba7d8b, type: 3}
       propertyPath: juice
       value: 
       objectReference: {fileID: 8274470406823356863}
@@ -2697,6 +2722,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6582314401668829746, guid: 0025adc5b19374c85bfea75177ba7d8b, type: 3}
+      propertyPath: gsm
+      value: 
+      objectReference: {fileID: 1763896161}
+    - target: {fileID: 6582314401668829746, guid: 0025adc5b19374c85bfea75177ba7d8b, type: 3}
       propertyPath: juice
       value: 
       objectReference: {fileID: 8274470406823356863}
@@ -3010,6 +3039,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6582314401668829746, guid: 0025adc5b19374c85bfea75177ba7d8b, type: 3}
+      propertyPath: gsm
+      value: 
+      objectReference: {fileID: 1763896161}
     - target: {fileID: 6582314401668829746, guid: 0025adc5b19374c85bfea75177ba7d8b, type: 3}
       propertyPath: juice
       value: 

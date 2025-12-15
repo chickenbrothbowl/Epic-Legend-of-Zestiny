@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Rendering;
+using UnityEngine.SceneManagement;
 
 public class CardSlot : MonoBehaviour
 {
@@ -20,6 +21,8 @@ public class CardSlot : MonoBehaviour
     private LineRenderer borderLine;
     private Material borderMaterial;
     private static readonly int EmissionColor = Shader.PropertyToID("_EmissionColor");
+
+    public JuiceLevel juice;
     
     public bool IsEmpty => currentCard == null;
     
@@ -28,6 +31,10 @@ public class CardSlot : MonoBehaviour
         CreateBorderFrame();
         SetBorderGlow(normalColor, 0);
     }
+
+	public bool CanPlay(Card card){
+		return IsEmpty && card.Data.Cost <= juice.juiceAmnt;
+	}
     
     void CreateBorderFrame()
     {
@@ -78,7 +85,7 @@ public class CardSlot : MonoBehaviour
         SetBorderGlow(normalColor, 0);
     }
     
-    void SetBorderGlow(Color color, float intensity)
+    public void SetBorderGlow(Color color, float intensity)
     {
         if (borderMaterial != null)
         {
@@ -93,10 +100,21 @@ public class CardSlot : MonoBehaviour
     public void PlaceCard(Card card)
     {
         if (!IsEmpty) return;
-        
+        if (juice)
+        {
+            juice.SetJuice(juice.juiceAmnt -= card.Data.Cost);
+        }
         currentCard = card;
         card.transform.SetParent(transform);
         card.transform.localPosition = Vector3.zero;
+		card.transform.localEulerAngles = new Vector3(90, 0, 0); // Z-axis rotation for 2D
+
+        StopAllCoroutines();
+
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.PlayCardPlacement();
+        }
     }
     
     public Card RemoveCard()

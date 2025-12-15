@@ -1,0 +1,18 @@
+ability_id,description
+acidic,Deals damage to attacking creature when hit
+catch,Attacks random opposing slot when played
+corrosive,Weakens attacking creature when hit (reduces ATK)
+finesse,Blocks flying opponents
+flying,Cannot be blocked by cards without flying or finesse
+gluttonous,Every tribal ally death raises this creature's HP by 2
+hardened,Cannot be impacted by negative status effects
+harvest,Increases hand size by 1
+juiced,Extra strong after being juiced
+juicy,Can be juiced twice
+opportunist,When ally is killed gain +1 ATK
+pummel,Excess damage to cards overflows to opponent
+reach,Can attack adjacent enemy cards
+rotten,Opposing cards take damage over time
+shielded,No description available
+tribal,Every other tribal type on the field raises this creature's HP by 1
+vampire,Damage done to opponent heals you for the damage dealt

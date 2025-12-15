@@ -1,91 +1,90 @@
 using UnityEngine;
 using System.Collections;
-using System.Collections.Generic;
 
-public class DeckLayout : MonoBehaviour
+public class DeckLayout : Deck
 {
-    public List<GameObject> cards;
-    public float yIncrement = 0.2f;
-    public float animationSpeed = 5f; // Speed of the animation
-    private int previousChildCount = 0;
+    public bool canDraw = true;
     public GameObject hand;
+    private CardHandLayout handLayout;
+    private bool isShaking;
 
-    void Start()
-    {
-        UpdateCardsArray();
-        ArrangeCards();
-    }
+    [Header("Shake Settings")]
+    public float shakeSpeed = 8f;
+    public float shakeAmount = 10f;
+    private Quaternion originalRotation;
 
-    void Update()
+    protected override void Update()
     {
-        // Only update the array if the number of children changed
-        if (transform.childCount != previousChildCount)
+        base.Update();
+
+        if (cards.Count == 0) return;
+
+        GameObject topCard = cards[cards.Count - 1];
+
+        if (canDraw)
         {
-            UpdateCardsArray();
-            ArrangeCards();
-            previousChildCount = transform.childCount;
+            if (!isShaking)
+            {
+                originalRotation = topCard.transform.localRotation;
+                StartShaking(topCard);
+                isShaking = true;
+            }
+        }
+        else
+        {
+			if (isShaking) {
+				StopShaking(topCard);
+			}
         }
     }
 
-    void UpdateCardsArray()
+    void OnMouseDown()
     {
-        cards = new List<GameObject>();
-        for (int i = 0; i < transform.childCount; i++)
+        if (canDraw)
         {
-            cards.Add(transform.GetChild(i).gameObject);
+            DrawCard();
+            isShaking = false;
         }
     }
 
-	[ContextMenu("Draw Card")]
+    [ContextMenu("Draw Card")]
     public void DrawCard()
     {
         if (cards.Count == 0) return;
-        StopAllCoroutines();
         GameObject card = cards[cards.Count - 1];
         cards.Remove(card);
         previousChildCount--;
         card.transform.SetParent(hand.transform);
+        StopAllCoroutines();
 
-        // Reset card's animation state
         Card cardComponent = card.GetComponent<Card>();
         if (cardComponent != null)
         {
+            cardComponent.isDraggable = true;
             cardComponent.isReturning = false;
         }
     }
 
-    public void ArrangeCards()
+    void StartShaking(GameObject card)
     {
-        if (cards.Count == 0) return;
-        // Calculate the offset to center the cards
-        float totalHeight = (cards.Count - 1) * yIncrement;
-
-        for (int i = 0; i < cards.Count; i++)
-        {
-            Vector3 targetPosition = transform.position;
-            targetPosition.y += i * yIncrement;
-            // Animate to the target position
-            StartCoroutine(AnimateToPosition(cards[i], targetPosition));
-        }
+        isShaking = true;
+        StartCoroutine(ShakeRoutine(card));
     }
 
-    IEnumerator AnimateToPosition(GameObject card, Vector3 targetPosition)
+    void StopShaking(GameObject card)
     {
-        if (card == null) yield break;
+        isShaking = false;
+        StopAllCoroutines();
+        card.transform.localRotation = originalRotation;
+    }
 
-        while (Vector3.Distance(card.transform.position, targetPosition) > 0.01f)
+    IEnumerator ShakeRoutine(GameObject card)
+    {
+        while (isShaking)
         {
-            // Clamp lerp factor to prevent instant snapping on frame time spikes
-            float lerpFactor = Mathf.Min(Time.deltaTime * animationSpeed, 0.5f);
-            card.transform.position = Vector3.Lerp(
-                card.transform.position,
-                targetPosition,
-                lerpFactor
-            );
+            float shake = Mathf.Sin(Time.time * shakeSpeed) * shakeAmount;
+            card.transform.localRotation = originalRotation * Quaternion.Euler(shake, shake, shake);
             yield return null;
         }
-        
-        // Snap to final position
-        card.transform.position = targetPosition;
     }
 }
